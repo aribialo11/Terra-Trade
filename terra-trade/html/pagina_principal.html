@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta de Propiedades</title>
+    <link rel="stylesheet" href="../css/pagina_principal.css">
+</head>
+<body>
+<div class="container">
+    <!-- Formulario para agregar una nueva propiedad -->
+    <div class="Formulario">
+        <h2 class="titulo" >Agregar Nueva Propiedad</h2>
+        <form id="Formulario">
+            <label for="property-name">Nombre:</label><br>
+            <input type="text" id="property-name" name="property-name" required><br>
+            <label for="property-address">Dirección:</label><br>
+            <input type="text" id="property-address" name="property-address" required><br>
+            <label for="property-neighborhood">Barrio:</label><br>
+            <input type="text" id="property-neighborhood" name="property-neighborhood" required><br>
+            <label for="property-price">Precio:</label><br>
+            <input type="number" id="property-price" name="property-price" required><br>
+            <label for="property-image">URL de la imagen:</label><br>
+            <input type="text" id="property-image" name="property-image" required><br>
+            <input class="boton" type="submit" value="Agregar Propiedad">
+        </form>
+    </div>
+    <!-- Fin del formulario -->
+
+
+    <!-- Contenedor de propiedades -->
+    <div id="properties-container" class="properties-container"></div>
+    <!-- Fin del contenedor de propiedades -->
+</div>
+
+
+<script src="../js/pagina_principal.js"></script>
+
+
+</body>
+</html>

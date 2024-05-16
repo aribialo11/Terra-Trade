@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:#5F814F;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.Formulario {
+    background-color:#5F814F;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+.titulo {
+    margin-top: 0;
+    color: white;
+
+
+}
+.Formulario label {
+    margin-bottom: 5px;
+    display: block;
+    color: white;
+}
+.Formulario input[type="text"],
+.Formulario input[type="number"],
+.Formulario input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+
+
+}
+.boton{
+    background-color: rgba(145, 195, 144, 1);
+    display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid green; /* Cambia el color del borde según tu preferencia */
+            border-radius: 20px; /* Esto hace que el borde sea redondo */
+            color: #ffffff; /* Color del texto */
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+}
+.properties-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.property {
+    width: calc(33.33% - 20px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    position: relative;
+}
+.property img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+.property h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+.property p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.delete-button:hover {
+    background-color: #cc0000;
+}
