@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color:#5F814F;
@@ -37,17 +37,21 @@ body {
 
 
 }
-.boton{
-    background-color: rgba(145, 195, 144, 1);
-    display: inline-block;
-            padding: 10px 20px;
-            border: 2px solid green; /* Cambia el color del borde según tu preferencia */
-            border-radius: 20px; /* Esto hace que el borde sea redondo */
-            color: #ffffff; /* Color del texto */
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
+.boton {
+    margin-top: 20px;
+    text-align: left;
 }
+
+.boton {
+    border: none;
+    border-radius: 20px;
+    background-color: #6abf7c;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
 .properties-container {
     display: flex;
     flex-wrap: wrap;

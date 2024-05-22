@@ -1,3 +1,8 @@
-$("#volverppp").click(function(){
-    window.location.replace("pagina_principal.html");
+$(document).ready(function(){
+
+
+    $("#volverppp").click(function(){
+        window.location.replace("paginaprincipal.html");
+    });
 });
+
