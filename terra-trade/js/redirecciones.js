@@ -1,8 +1,12 @@
 $(document).ready(function(){
 
 
-    $("#volverppp").click(function(){
-        window.location.replace("paginaprincipal.html");
+    $("#volverpp").click(function(){
+        window.location.replace("pagina_principal.html");
+    });
+    
+    $("#volverpi").click(function(){
+        window.location.replace("pagina_inicio.html");
     });
 });
 

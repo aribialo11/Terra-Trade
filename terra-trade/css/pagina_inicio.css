@@ -1,8 +1,18 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px; /* Añadido un margen entre los bordes */
     padding: 0;
     background-color: #5F814F;
+    margin: 0; /* Ajuste de margen para eliminar los espacios adicionales */
+}
+
+.terratrade {
+    color: white;
+    margin: 0; /* Ajuste de margen para alinearlo mejor */
+    padding: 0 20px; /* Ajuste de padding para dar espacio alrededor del texto */
+    font-size: 40px; /* Ajuste del tamaño de fuente para que no sea demasiado grande */
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 header {
@@ -10,17 +20,18 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    background-color: #5F814F; /* Color de fondo para el encabezado */
 }
 
 nav ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
 nav ul li {
-    display: inline;
-    margin-right: 20px;
+    margin-right: 30px; /* Aumentado el margen derecho para más espacio */
 }
 
 nav ul li a {
@@ -42,6 +53,7 @@ nav ul li a {
 .imagen-y-frase {
     display: flex;
     align-items: center;
+    padding: 20px; /* Añadir espacio alrededor de la imagen y la frase */
 }
 
 .imagen {

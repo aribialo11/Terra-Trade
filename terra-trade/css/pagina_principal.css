@@ -7,7 +7,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+
 }
 .Formulario {
     background-color:#5F814F;
@@ -15,12 +15,22 @@ body {
     padding: 20px;
     box-sizing: border-box;
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 .titulo {
     margin-top: 0;
     color: white;
-
-
+    
+}
+.terratrade{
+    color: white;
+    margin: 30px;
+    font-size: 40px;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    max-width: fit-content;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 .Formulario label {
     margin-bottom: 5px;
@@ -40,15 +50,12 @@ body {
 .boton {
     margin-top: 20px;
     text-align: left;
-}
-
-.boton {
     border: none;
     border-radius: 20px;
     background-color: #6abf7c;
     color: #fff;
-    padding: 10px 20px;
     cursor: pointer;
+    max-width:fit-content;
 }
 
 
