@@ -3,40 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta de Propiedades</title>
-    <link rel="stylesheet" href="../css/pagina_principal.css">
+    <title>Pagina de inicio</title>
+    <link rel="stylesheet" href="../css/pagina_inicio.css">
 </head>
 <body>
-<div class="container">
-    <!-- Formulario para agregar una nueva propiedad -->
-    <div class="Formulario">
-        <h2 class="titulo" >Agregar Nueva Propiedad</h2>
-        <form id="Formulario">
-            <label for="property-name">Nombre:</label><br>
-            <input type="text" id="property-name" name="property-name" required><br>
-            <label for="property-address">Dirección:</label><br>
-            <input type="text" id="property-address" name="property-address" required><br>
-            <label for="property-neighborhood">Barrio:</label><br>
-            <input type="text" id="property-neighborhood" name="property-neighborhood" required><br>
-            <label for="property-price">Precio:</label><br>
-            <input type="number" id="property-price" name="property-price" required><br>
-            <label for="property-image">URL de la imagen:</label><br>
-            <input type="text" id="property-image" name="property-image" required><br>
-            <input class="boton" type="button" value="Agregar Propiedad">
-        </form>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Acerca de nosotros</a></li>
+                <li><a href="#">Perfil</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+            </ul>
+        </nav>
+        <div class="login-btn">
+            <button>Login</button>
+        </div>
+    </header>
+    <div class="imagen-y-frase">
+        <div class="imagen">
+            <img src="../imagenes/logo1.png">
+        </div>
+        <div class="frase">
+            <h1>Empieza a invertir <br> en terrenos <br> desde la comodidad <br> de tu casa</h1>
+            <div class="comenzar-btn">
+                <button class="volverppp">Comenzar</button>
+            </div>
+        </div>
     </div>
-    <!-- Fin del formulario -->
-
-
-    <!-- Contenedor de propiedades -->
-    <div id="properties-container" class="properties-container"></div>
-    <!-- Fin del contenedor de propiedades -->
-</div>
-
-
-<script src="../js/pagina_principal.js"></script>
-
-
+    
 </body>
 <script>
     (function(d){
