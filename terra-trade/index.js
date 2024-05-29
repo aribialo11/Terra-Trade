@@ -1,4 +1,4 @@
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js'
 
 // Reemplaza con tu URL y clave API de Supabase
 const supabaseUrl = 'https://xyzcompany.supabase.co';
