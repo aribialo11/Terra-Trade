@@ -1,6 +1,32 @@
-import Image from "next/image";
+import useSWR from 'swr';
 
-export default function Home() {
+const fetcher = (arg: any, ...args: any) => fetch(arg, ...args).then((res) => res.json());
+const Swr = () => {
+  const {
+    data: countries,
+    error,
+    isValidating,
+  } = useSWR('https://restcountries.com/v2/all', fetcher);
+
+  // Handles error and loading state
+  if (error) return <div className='failed'>failed to load</div>;
+  if (isValidating) return <div className="Loading">Loading...</div>;
+
+  return (
+    <div>
+      {countries &&
+        countries.map((country, index) => (
+          <img key={index} src={country.flags.png} alt='flag' width={100} />
+        ))}
+    </div>
+  );
+};
+
+export default Swr;
+
+export default Page;
+
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
