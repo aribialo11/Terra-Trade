@@ -1,28 +1,30 @@
-import useSWR from 'swr';
+import { useState, useEffect } from 'react';
 
-const fetcher = (arg: any, ...args: any) => fetch(arg, ...args).then((res) => res.json());
-const Swr = () => {
-  const {
-    data: countries,
-    error,
-    isValidating,
-  } = useSWR('https://restcountries.com/v2/all', fetcher);
-
-  // Handles error and loading state
-  if (error) return <div className='failed'>failed to load</div>;
-  if (isValidating) return <div className="Loading">Loading...</div>;
+const Fetch = () => {
+  const [agencias, setAgencias] = useState([]);
+  
+  useEffect(() => {
+    fetch('  ')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAgencias(data);
+      });
+  }, []);
 
   return (
     <div>
-      {countries &&
-        countries.map((country, index) => (
-          <img key={index} src={country.flags.png} alt='flag' width={100} />
-        ))}
+      {agencias.map((agencia) => (
+        <div key={agencia.id}>
+          <h2>{agencia.name}</h2>
+          <p>{agencia.email}</p>
+        </div>
+      ))}
     </div>
   );
 };
-
-export default Swr;
+};
+export default Fetch;
 
 export default Page;
 
