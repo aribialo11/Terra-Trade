@@ -13,11 +13,11 @@ export async function GET(req: NextRequest) {
       throw error;
     }
 
-    console.log('Data from Supabase:', data); // Agrega este log
+    console.log('Data from Supabase:', data);
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Error fetching data:', error); // Agrega este log
+    console.error('Error fetching data:', error); 
     return NextResponse.json({ message: 'Error al obtener los usuarios', error }, { status: 500 });
   }
 }
