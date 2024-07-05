@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PaginaInicio = () => {
+export const PaginaInicio = () => {
     return (
-        <div>
+        <>
             <div className="imagen-y-frase">
                 <div className="imagen">
                     <img src="/imagenes/logo.png" alt="Logo" />
@@ -14,11 +14,7 @@ const PaginaInicio = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
-
-
-export default PaginaInicio;
-
 
