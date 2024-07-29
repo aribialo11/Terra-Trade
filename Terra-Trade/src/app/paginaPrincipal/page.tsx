@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import web3 from '../utils/web3';
 
-export const PaginaInicio = () => {
-    return (
-        <>
-            <div className="imagen-y-frase">
-                <div className="imagen">
-                    <img src="/imagenes/logo.png" alt="Logo" />
-                </div>
-                <div className="frase">
-                    <h1>Empieza a invertir <br /> en terrenos <br /> desde la comodidad <br /> de tu casa</h1>
-                    <div className="comenzar-btn">
-                        <button>Comenzar</button>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+const PaginaPrincipal = () => {
+  const [account, setAccount] = useState('');
+
+  useEffect(() => {
+    const loadAccount = async () => {
+      const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
+    };
+
+    loadAccount();
+  }, []);
+
+  return (
+    <div>
+      <h1>Bienvenido a TerraTrade</h1>
+      <p>Cuenta conectada: {account}</p>
+    </div>
+  );
 };
 
+export default PaginaPrincipal;
