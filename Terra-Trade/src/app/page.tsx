@@ -40,8 +40,8 @@ const Home = () => {
           <Image
             src="/imagenes/logo.png"
             alt="Logo"
-            width={500}
-            height={500}
+            width={1800}
+            height={1000}
           />
         </div>
         <div className="frase" style={{ flex: 1, color: 'white', textAlign: 'right' }}>
