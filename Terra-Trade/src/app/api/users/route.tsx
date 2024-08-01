@@ -1,23 +1,33 @@
-// route.tsx
-
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../../supabaseClient';
 
-export async function GET(req: NextRequest) {
+
+export async function post(req: NextRequest) {
+  if (req.method !== 'POST') {
+    return NextResponse.json('Method Not Allowed', { status: 405 });
+  }
+
+
   try {
     const { data, error } = await supabase
       .from('Agencias')
-      .select('*');
-  
+      .insert(req.json); // Inserta los datos del cuerpo de la solicitud POST en la tabla 'Agencias'
+
+
     if (error) {
       throw error;
     }
 
-    console.log('Data from Supabase:', data);
+
+    console.log('Data inserted into Supabase:', data);
+
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Error fetching data:', error); 
-    return NextResponse.json({ message: 'Error al obtener los usuarios', error }, { status: 500 });
+    console.error('Error inserting data:', error);
+    return NextResponse.json({ message: 'Error al insertar datos en Supabase', error }, { status: 500 });
   }
 }
+
+
+export default post;
