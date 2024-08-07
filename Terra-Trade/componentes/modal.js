@@ -43,15 +43,18 @@ const styles = {
     backgroundColor: 'lightgray',
     borderRadius: '50%',
     border: 'none',
-    padding: '5px',
+    padding: '4px',
     cursor: 'pointer',
+    width: '35px',
+    height: '35px',
+    marginBottom: '5px', // Añadir margen inferior
   },
   button: {
     backgroundColor: 'lightgray',
     border: 'none',
     borderRadius: '20px',
     padding: '10px 20px',
-    marginTop: '20px',
+    marginTop: '40px', // Incrementar el margen superior
     cursor: 'pointer',
     width: '100%',
   },

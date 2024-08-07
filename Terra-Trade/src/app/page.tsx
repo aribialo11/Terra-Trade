@@ -26,13 +26,13 @@ const Home = () => {
         <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold' }}>
           TerraTrade
         </div>
-        <div style={{ display: 'flex', gap: '20px', color: 'white' }}>
+        <div style={{ display: 'flex', gap: '50px', color: 'white' }}>
           <span>Home</span>
           <span>Servicios</span>
           <span>Acerca de nosotros</span>
           <span>Perfil</span>
           <span>Preguntas frecuentes</span>
-          <button style={{ backgroundColor: '#9DBFA4', border: 'none', padding: '10px 20px', borderRadius: '5px', color: 'white' }}>Comenzar</button>
+          
         </div>
       </div>
       <div className="imagen-y-frase" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%' }}>
