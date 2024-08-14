@@ -20,7 +20,8 @@
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.11",
     "swr": "^2.2.5",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "web3": "^4.11.1"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
@@ -28,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/web3": "^1.2.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "hardhat": "^2.22.5",
