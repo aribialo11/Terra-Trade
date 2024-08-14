@@ -9,7 +9,7 @@ type Propiedades = {
   id_propiedades: number;
   nombre: string;
   telefono: number;
-}
+};
 
 const Page = () => {
   const [propiedades, setPropiedades] = useState<Propiedades[]>([]);
