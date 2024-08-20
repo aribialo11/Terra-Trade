@@ -26,6 +26,12 @@ const Home = () => {
     setLoginModalOpen(false);
   };
 
+  function HomePage(){
+    return (
+      <div>HomePage</div>
+    )
+  }
+
   return (
     <div style={{ backgroundColor: '#20493C', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Head>
