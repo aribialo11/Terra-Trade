@@ -10,6 +10,7 @@
     "web3": "^4.10.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3"
+    "@types/react": "^18.3.3",
+    "hardhat": "^2.22.7"
   }
 }
