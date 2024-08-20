@@ -135,7 +135,7 @@ const Page: React.FC = () => {
           text-decoration: none;
           cursor: pointer;
           max-width: 180px;
-          
+          margin-top: 30px;
         }
         .properties-container {
           display: flex;
