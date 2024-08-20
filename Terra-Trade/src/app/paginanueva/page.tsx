@@ -43,6 +43,7 @@ const Page: React.FC = () => {
   };
 
   return (
+
     <div className="container">
       {/* Formulario para agregar una nueva propiedad */}
       <div className="Formulario">
@@ -85,7 +86,7 @@ const Page: React.FC = () => {
           font-family: Arial, sans-serif;
           margin: 0;
           padding: 0;
-          background-color: #5F814F;
+          background-color: #20493C;
         }
         .container {
           max-width: 1200px;
@@ -93,16 +94,23 @@ const Page: React.FC = () => {
           padding: 20px;
         }
         .Formulario {
-          background-color: #5F814F;
+          background-color: #20493C;
           border: 1px solid #ccc;
           padding: 20px;
           box-sizing: border-box;
+          margin-top: 100px;
           margin-bottom: 20px;
         }
         .titulo {
+          font-size: 2em; /* Aumenta el tamaño de la fuente */
+          color: #E0E0E0; /* Cambia el color del texto */
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega una sombra al texto */
+          margin-bottom: 10px; /* Añade un margen inferior para separación */
+          text-align: center; /* Centra el texto */
           margin-top: 0;
           color: white;
         }
+        
         .Formulario label {
           margin-bottom: 5px;
           display: block;
@@ -126,6 +134,8 @@ const Page: React.FC = () => {
           text-align: center;
           text-decoration: none;
           cursor: pointer;
+          max-width: 180px;
+          
         }
         .properties-container {
           display: flex;
