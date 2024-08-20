@@ -40,7 +40,7 @@ const PopoverContent: FC<{ children: ReactNode }> = ({ children }) => {
 
 export const ConnectWalletButton = () => {
   const { sdk, connected, connecting, account } = useSDK();
-
+ kj
   const connect = async () => {
     try {
       await sdk?.connect();
