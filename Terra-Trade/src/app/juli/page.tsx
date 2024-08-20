@@ -1,55 +1,28 @@
 'use client';
 
-
-import React, { useEffect, useState } from 'react';
-import Web3 from '../utils/web3';
-
-
-const styles = {
-  title: {
-    fontSize: '2em',
-    color: 'blue',
-  },
-  accountText: {
-    fontSize: '1.2em',
-    color: 'green',
-  }
-};
-
+import React, { useEffect } from 'react';
+import web3 from '../utils/web3'; 
 
 const PaginaPrincipal = () => {
-  const [account, setAccount] = useState('');
-
-
   useEffect(() => {
-    const loadAccount = async () => {
+    const checkInfuraConnection = async () => {
       try {
-        const accounts = await Web3.eth.getAccounts();
-        if (accounts.length > 0) {
-          setAccount(accounts[0]);
-        } else {
-          console.warn('No hay cuentas conectadas.');
-        }
+        const blockNumber = await web3.eth.getBlockNumber();
+        console.log('Conexión exitosa. El número del bloque más reciente es:', blockNumber);
       } catch (error) {
-        console.error('Error al cargar la cuenta:', error);
+        console.error('Error al conectar con Infura:', error);
       }
     };
 
-
-    loadAccount();
-  }, []);
-
+    checkInfuraConnection();
+  }, []); 
 
   return (
     <div style={{ marginTop: '200px' }}>
-      <h1 style={styles.title}>Bienvenido a TerraTrade</h1>
-      <p style={styles.accountText}>Cuenta conectada: {account || 'No hay cuenta conectada'}</p>
+      <h1>Verificación de Conexión a Infura</h1>
+      <p>Revisa la consola para ver el resultado de la conexión.</p>
     </div>
-  );
- 
+  );  
 };
 
-
 export default PaginaPrincipal;
-
-
