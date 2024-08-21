@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
 
 interface Property {
   id: number;
@@ -15,10 +13,9 @@ interface Property {
 
 const Page: React.FC = () => {
   const [properties, setProperties] = useState<Property[]>([]);
-
   const formRef = useRef<HTMLFormElement>(null);
 
-  const addProperty = (event: React.FormEvent<HTMLFormElement>) => {
+  const addProperty = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (formRef.current) {
@@ -33,8 +30,27 @@ const Page: React.FC = () => {
         image: form["property-image"].value,
       };
 
-      setProperties([...properties, newProperty]);
-      form.reset();
+      try {
+        const response = await fetch('/api/properties', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newProperty),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to add property');
+        }
+
+        const data = await response.json();
+        console.log('Property added:', data);
+
+        setProperties([...properties, newProperty]);
+        form.reset();
+      } catch (error) {
+        console.error('Error adding property:', error);
+      }
     }
   };
 
@@ -43,7 +59,6 @@ const Page: React.FC = () => {
   };
 
   return (
-
     <div className="container">
       {/* Formulario para agregar una nueva propiedad */}
       <div className="Formulario">
@@ -102,15 +117,13 @@ const Page: React.FC = () => {
           margin-bottom: 20px;
         }
         .titulo {
-          font-size: 2em; /* Aumenta el tamaño de la fuente */
-          color: #E0E0E0; /* Cambia el color del texto */
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega una sombra al texto */
-          margin-bottom: 10px; /* Añade un margen inferior para separación */
-          text-align: center; /* Centra el texto */
-          margin-top: 0;
+          font-size: 2em;
           color: white;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          margin-bottom: 10px;
+          text-align: center;
+          margin-top: 0;
         }
-        
         .Formulario label {
           margin-bottom: 5px;
           display: block;
