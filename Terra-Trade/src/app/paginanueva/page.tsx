@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
 
 interface Property {
   id: number;
@@ -31,7 +33,7 @@ const Page: React.FC = () => {
       };
 
       try {
-        const response = await fetch('/api/properties', {
+        const res = await fetch('/api/properties', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -39,17 +41,16 @@ const Page: React.FC = () => {
           body: JSON.stringify(newProperty),
         });
 
-        if (!response.ok) {
-          throw new Error('Failed to add property');
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Property added:', data);
+          setProperties([...properties, newProperty]);
+          form.reset();
+        } else {
+          console.error('Failed to add property');
         }
-
-        const data = await response.json();
-        console.log('Property added:', data);
-
-        setProperties([...properties, newProperty]);
-        form.reset();
       } catch (error) {
-        console.error('Error adding property:', error);
+        console.error('Error:', error);
       }
     }
   };
@@ -118,7 +119,7 @@ const Page: React.FC = () => {
         }
         .titulo {
           font-size: 2em;
-          color: white;
+          color: #E0E0E0;
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
           margin-bottom: 10px;
           text-align: center;
