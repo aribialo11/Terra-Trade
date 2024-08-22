@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
+import Navbar from '@/components/Navbar'
+import { Providers } from './Providers'
 
 
 
@@ -21,7 +22,11 @@ export default function RootLayout({
         <title>{String(metadata.title ?? 'Default Title')}</title>
         <meta name="description" content={String(metadata.description ?? 'Default description')} />
       </head>
-      <body>{children}
+      <body> 
+        <Providers>
+        <Navbar />
+        {children}
+        </Providers>
       <div className="navbar" style={{ position: 'absolute', top: '0', width: '100%', display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#20493C' }}>
         <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
           TerraTrade
