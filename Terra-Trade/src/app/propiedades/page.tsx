@@ -31,10 +31,10 @@ const Page = () => {
 
   return (
     <div>
-      {propiedades.map((agencia) => (
-        <div key={agencia.id_propiedades.toString()}>
-          <h2>{agencia.nombre}</h2>
-          <p>{agencia.telefono.toString()}</p>
+      {propiedades.map((propiedades) => (
+        <div key={propiedades.id_propiedades.toString()}>
+          <h2>{propiedades.nombre}</h2>
+          <p>{propiedades.telefono.toString()}</p>
         </div>
       ))}
     </div>
