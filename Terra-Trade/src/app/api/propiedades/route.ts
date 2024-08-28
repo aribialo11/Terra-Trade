@@ -1,16 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { supabase } from '../../../../supabaseClient';
 
-export async function POST(req: NextRequest) {
-  if (req.method !== 'POST') {
-    return NextResponse.json('Method Not Allowed', { status: 405 });
-  }
-
+export async function POST(req: Request) {
   try {
     const body = await req.json();
 
+    // Validar los datos del body si es necesario
+    if (!body.name || !body.address || !body.neighborhood || !body.price || !body.image) {
+      return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
+    }
+
     const { data, error } = await supabase
-      .from('Properties') // Replace 'Properties' with the actual table name
+      .from('Propiedades') // Asegúrate de que el nombre de la tabla sea correcto
       .insert(body);
 
     if (error) {
@@ -25,5 +26,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Error inserting data into Supabase', error }, { status: 500 });
   }
 }
-
-export default POST;

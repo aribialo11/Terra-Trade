@@ -4,17 +4,17 @@ import React, { useRef, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-interface Property {
+interface Propiedad {
   id: number;
-  name: string;
-  address: string;
-  neighborhood: string;
-  price: number;
-  image: string;
+  nombre: string;
+  direccion: string;
+  barrio: string;
+  precio: number;
+  imagen: string;
 }
 
 const Page: React.FC = () => {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
 
   const addProperty = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,28 +23,28 @@ const Page: React.FC = () => {
     if (formRef.current) {
       const form = formRef.current;
 
-      const newProperty: Property = {
+      const newPropiedad: Propiedad = {
         id: Date.now(),
-        name: form["property-name"].value,
-        address: form["property-address"].value,
-        neighborhood: form["property-neighborhood"].value,
-        price: Number(form["property-price"].value),
-        image: form["property-image"].value,
+        nombre: form["propiedad-nombre"].value,
+        direccion: form["propiedad-direccion"].value,
+        barrio: form["propiedad-barrio"].value,
+        precio: Number(form["propiedad-precio"].value),
+        imagen: form["propiedad-imagen"].value,
       };
 
       try {
-        const res = await fetch('/api/properties', {
+        const res = await fetch('/api/propiedades', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newProperty),
+          body: JSON.stringify(newPropiedad),
         });
 
         if (res.ok) {
           const data = await res.json();
           console.log('Property added:', data);
-          setProperties([...properties, newProperty]);
+          setPropiedades([...propiedades, newPropiedad]);
           form.reset();
         } else {
           console.error('Failed to add property');
@@ -56,25 +56,25 @@ const Page: React.FC = () => {
   };
 
   const deleteProperty = (id: number) => {
-    setProperties(properties.filter((property) => property.id !== id));
+    setPropiedades(propiedades.filter((propiedad) => propiedad.id !== id));
   };
 
   return (
     <div className="container">
-      {/* Formulario para agregar una nueva propiedad */}
+      {/* Form */}
       <div className="Formulario">
         <h2 className="titulo">Agregar Nueva Propiedad</h2>
         <form id="Formulario" onSubmit={addProperty} ref={formRef}>
-          <label htmlFor="property-name">Nombre:</label><br />
-          <input type="text" id="property-name" name="property-name" required /><br />
-          <label htmlFor="property-address">Dirección:</label><br />
-          <input type="text" id="property-address" name="property-address" required /><br />
-          <label htmlFor="property-neighborhood">Barrio:</label><br />
-          <input type="text" id="property-neighborhood" name="property-neighborhood" required /><br />
-          <label htmlFor="property-price">Precio:</label><br />
-          <input type="number" id="property-price" name="property-price" required /><br />
-          <label htmlFor="property-image">URL de la imagen:</label><br />
-          <input type="text" id="property-image" name="property-image" required /><br />
+          <label htmlFor="propiedad-nombre">Nombre:</label><br />
+          <input type="text" id="propiedad-nombre" name="propiedad-nombre" required /><br />
+          <label htmlFor="propiedad-direccion">Dirección:</label><br />
+          <input type="text" id="propiedad-direccion" name="propiedad-direccion" required /><br />
+          <label htmlFor="propiedad-barrio">Barrio:</label><br />
+          <input type="text" id="propiedad-barrio" name="propiedad-barrio" required /><br />
+          <label htmlFor="propiedad-precio">Precio:</label><br />
+          <input type="number" id="propiedad-precio" name="propiedad-precio" required /><br />
+          <label htmlFor="propiedad-imagen">URL de la imagen:</label><br />
+          <input type="text" id="propiedad-imagen" name="propiedad-imagen" required /><br />
           <input className="boton" type="submit" value="Agregar Propiedad" />
         </form>
       </div>
@@ -82,16 +82,16 @@ const Page: React.FC = () => {
 
       {/* Contenedor de propiedades */}
       <div id="properties-container" className="properties-container">
-        {properties.map((property) => (
-          <div key={property.id} className="property">
-            <button className="delete-button" onClick={() => deleteProperty(property.id)}>
+        {propiedades.map((propiedades) => (
+          <div key={propiedades.id} className="property">
+            <button className="delete-button" onClick={() => deleteProperty(propiedades.id)}>
               Eliminar
             </button>
-            <img src={property.image} alt={property.name} />
-            <h2>{property.name}</h2>
-            <p>Dirección: {property.address}</p>
-            <p>Barrio: {property.neighborhood}</p>
-            <p>Precio: ${property.price}</p>
+            <img src={propiedades.imagen} alt={propiedades.nombre} />
+            <h2>{propiedades.nombre}</h2>
+            <p>Dirección: {propiedades.direccion}</p>
+            <p>Barrio: {propiedades.barrio}</p>
+            <p>Precio: ${propiedades.precio}</p>
           </div>
         ))}
       </div>
