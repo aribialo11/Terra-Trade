@@ -1,17 +1,20 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '../../../../supabaseClient';
 
+const supabaseUrl = 'https://ncnjbkwnzmbroxedwour.supabase.co' ;
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5jbmpia3duem1icm94ZWR3b3VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY5MDU0NTUsImV4cCI6MjAzMjQ4MTQ1NX0.jGuUnZmvbpltBbLfgQzRLFK216C4ff_37aGDJ3V4bvQ';
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // Validar los datos del body si es necesario
     if (!body.name || !body.address || !body.neighborhood || !body.price || !body.image) {
       return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
     }
 
+
     const { data, error } = await supabase
-      .from('Propiedades') // Asegúrate de que el nombre de la tabla sea correcto
+      .from('propiedades') 
       .insert(body);
 
     if (error) {
