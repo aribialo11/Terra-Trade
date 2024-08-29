@@ -8,18 +8,17 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // Validar los datos del body utilizando los nombres de campo correctos
     if (!body.nombre || !body.direccion || !body.barrio || !body.precio || !body.url_de_la_imagen) {
       return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
     }
 
 
     const { data, error } = await supabase
-      .from('Propiedades') // Asegúrate de que el nombre de la tabla sea correcto
-      .insert([body]); // Usa corchetes alrededor del objeto para insertar correctamente
+      .from('Propiedades') 
+      .insert([body]);
 
     if (error) {
-      console.error('Error de Supabase:', error); // Añade este log
+      console.error('Error de Supabase:', error); 
       throw error;
     }
 

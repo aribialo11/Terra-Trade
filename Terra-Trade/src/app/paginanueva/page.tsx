@@ -26,8 +26,8 @@ const Page: React.FC = () => {
     if (formRef.current) {
       const form = formRef.current;
 
-      const newPropiedad: Propiedad = {
-        id: Date.now(),
+      // Remove 'id' from newPropiedad as it is automatically generated in the database
+      const newPropiedad = {
         nombre: form["propiedad-nombre"].value,
         direccion: form["propiedad-direccion"].value,
         barrio: form["propiedad-barrio"].value,
@@ -45,9 +45,11 @@ const Page: React.FC = () => {
         });
 
         if (res.ok) {
-          const data = await res.json();
+          const data: Propiedad = await res.json();
           console.log('Property added:', data);
-          setPropiedades([...propiedades, newPropiedad]);
+
+          // Add the newly created property from the response to the state
+          setPropiedades([...propiedades, data]);
           form.reset();
         } else {
           console.error('Failed to add property');

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '../../../../supabaseClient'; // Asegúrate de que la ruta es correcta
+import { supabase } from '../../../../supabaseClient';
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
     const { data, error } = await supabase
-      .from('Propiedades') // Cambia 'Properties' al nombre real de tu tabla si es necesario
+      .from('Propiedades') 
       .insert(body);
 
     if (error) {
