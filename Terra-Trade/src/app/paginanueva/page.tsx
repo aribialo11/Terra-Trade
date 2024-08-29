@@ -4,13 +4,16 @@ import React, { useRef, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
+
 interface Propiedad {
   id: number;
   nombre: string;
   direccion: string;
   barrio: string;
   precio: number;
-  imagen: string;
+  url_de_la_imagen: string;
 }
 
 const Page: React.FC = () => {
@@ -29,7 +32,7 @@ const Page: React.FC = () => {
         direccion: form["propiedad-direccion"].value,
         barrio: form["propiedad-barrio"].value,
         precio: Number(form["propiedad-precio"].value),
-        imagen: form["propiedad-imagen"].value,
+        url_de_la_imagen: form["propiedad-imagen"].value,
       };
 
       try {
@@ -87,7 +90,7 @@ const Page: React.FC = () => {
             <button className="delete-button" onClick={() => deleteProperty(propiedades.id)}>
               Eliminar
             </button>
-            <img src={propiedades.imagen} alt={propiedades.nombre} />
+            <img src={propiedades.url_de_la_imagen} alt={propiedades.nombre} />
             <h2>{propiedades.nombre}</h2>
             <p>Dirección: {propiedades.direccion}</p>
             <p>Barrio: {propiedades.barrio}</p>
