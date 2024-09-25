@@ -4,8 +4,11 @@ import React, { useRef, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+
+console.log('Supabase URL:', process.env.SUPABASE_URL);
+console.log('Supabase Key:', process.env.SUPABASE_KEY);
 
 interface Propiedad {
   id: number;
@@ -26,7 +29,6 @@ const Page: React.FC = () => {
     if (formRef.current) {
       const form = formRef.current;
 
-      // Remove 'id' from newPropiedad as it is automatically generated in the database
       const newPropiedad = {
         nombre: form["propiedad-nombre"].value,
         direccion: form["propiedad-direccion"].value,
@@ -48,7 +50,6 @@ const Page: React.FC = () => {
           const data: Propiedad = await res.json();
           console.log('Property added:', data);
 
-          // Add the newly created property from the response to the state
           setPropiedades([...propiedades, data]);
           form.reset();
         } else {
