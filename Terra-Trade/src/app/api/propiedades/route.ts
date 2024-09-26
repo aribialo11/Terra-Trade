@@ -1,14 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase URL or Key environment variables');
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { createClient } from '@/app/utils/supabase/server'
+import { cookies } from 'next/headers'
 
 export async function POST(req: Request) {
   try {
@@ -18,9 +10,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
     }
 
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+    if(typeof body.precio !== "number" )
+      {
+        body.precio = parseInt(body.precio)
+      }
+
     const { data, error } = await supabase
-      .from('Propiedades')
-      .insert([body]);
+      .from('propiedades')
+      .insert(body);
 
     if (error) {
       console.error('Error de Supabase:', error); 

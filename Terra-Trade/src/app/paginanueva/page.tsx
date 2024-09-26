@@ -4,12 +4,6 @@ import React, { useRef, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
-
-console.log('Supabase URL:', process.env.SUPABASE_URL);
-console.log('Supabase Key:', process.env.SUPABASE_KEY);
-
 interface Propiedad {
   id: number;
   nombre: string;
