@@ -12,12 +12,17 @@
   },
   "dependencies": {
     "@metamask/sdk-react": "^0.14.1",
+<<<<<<< HEAD
     "@supabase/ssr": "^0.5.1",
+=======
+    "@swc/core": "^1.7.28",
+    "@swc/helpers": "^0.5.13",
+>>>>>>> 265cb19860246161ae2246d297e68777bc8deffa
     "@types/body-parser": "^1.19.5",
     "@types/styled-components": "^5.1.34",
     "clsx": "^2.1.1",
     "ethers": "^6.13.2",
-    "next": "14.2.3",
+    "next": "^14.2.13",
     "next-auth": "^4.24.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
