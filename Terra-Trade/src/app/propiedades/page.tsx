@@ -83,7 +83,7 @@ const Page: React.FC = () => {
             <button className="delete-button" onClick={() => deleteProperty(property.id)}>
               Eliminar
             </button>
-            <img src={property.image} alt={property.name} />
+            <Image src={property.image} alt={property.name} />
             <h2>{property.name}</h2>
             <p>Dirección: {property.address}</p>
             <p>Barrio: {property.neighborhood}</p>
@@ -164,7 +164,7 @@ const Page: React.FC = () => {
           margin-bottom: 20px;
           position: relative;
         }
-        .property img {
+        .property Image {
           max-width: 100%;
           height: auto;
           display: block;
