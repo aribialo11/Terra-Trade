@@ -58,7 +58,7 @@ const Page: React.FC = () => {
   const deleteProperty = (id: number) => {
     setPropiedades(propiedades.filter((propiedad) => propiedad.id !== id));
   };
-
+  
   return (
     <div className="container">
       {/* Form */}
