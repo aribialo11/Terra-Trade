@@ -1,30 +1,37 @@
 'use client';
 
+
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Modal, LoginModal } from '../../componentes/modal'; 
+import { Modal, LoginModal } from '../../componentes/modal';
+
 
 const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
+
   const handleOpenModal = () => {
     setModalOpen(true);
   };
 
+
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
 
   const handleOpenLoginModal = () => {
     setModalOpen(false);
     setLoginModalOpen(true);
   };
 
+
   const handleCloseLoginModal = () => {
     setLoginModalOpen(false);
   };
+
 
   function HomePage(){
     return (
@@ -32,12 +39,13 @@ const Home = () => {
     )
   }
 
+
   return (
     <div style={{ backgroundColor: '#20493C', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Head>
         <title>Home</title>
       </Head>
-      
+     
       <div className="imagen-y-frase" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%' }}>
         <div className="imagen" style={{ flex: 1 }}>
           <Image
@@ -59,5 +67,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;

@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -15,6 +17,7 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -25,6 +28,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
 
 @layer utilities {
   .text-balance {
@@ -38,6 +42,7 @@ body {
     margin: 0; /* Ajuste de margen para eliminar los espacios adicionales */
     margin: 0;
 }
+
 
 .terratrade {
     color: white;
@@ -59,10 +64,12 @@ header {
     background-color: #5F814F;
 }
 
+
 nav ul li {
     margin-right: 30px; /* Aumentado el margen derecho para más espacio */
     margin-right: 30px;
 }
+
 
 nav ul li a {
     text-decoration: none;
@@ -70,6 +77,7 @@ nav ul li a {
     cursor: pointer; /* Cambiado el cursor */
     cursor: pointer;
 }
+
 
 .login-btn button, nav ul li a {
     background-color: #6abf7c;
@@ -79,6 +87,7 @@ nav ul li a {
     cursor: pointer;
 }
 
+
 .imagen-y-frase {
     display: flex;
     align-items: center;
@@ -86,11 +95,13 @@ nav ul li a {
     padding: 20px;
 }
 
+
 .imagen {
 nav ul li a {
     padding: 10px 20px;
     cursor: pointer;
 }
+
 
 /* Estilos para el modal */
 .modal {
@@ -106,6 +117,7 @@ nav ul li a {
     background-color: rgba(0,0,0,0.4);
 }
 
+
 .modal-content {
     margin: 15% auto;
     padding: 20px;
@@ -118,6 +130,7 @@ nav ul li a {
     box-shadow: none; /* Elimina cualquier sombra si es necesario */
 }
 
+
 .close {
     color: #aaa;
     float: right;
@@ -125,12 +138,14 @@ nav ul li a {
     font-weight: bold;
 }
 
+
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
+
 
 /* Estilos específicos del formulario */
 .formulario {
@@ -141,6 +156,7 @@ nav ul li a {
     padding: 20px;
 }
 
+
 .formulario h1 {
     text-align: center;
     padding: 0 0 25px 0;
@@ -148,10 +164,12 @@ nav ul li a {
     color: #5F814F;
 }
 
+
 .formulario form {
     padding: 0 20px;
     box-sizing: border-box;
 }
+
 
 form .username,
 form .contrasena {
@@ -159,6 +177,7 @@ form .contrasena {
     border-bottom: 2px solid #5F814F;
     margin: 35px 0;
 }
+
 
 .username input,
 .contrasena input {
@@ -170,6 +189,7 @@ form .contrasena {
     background: none;
     outline: none;
 }
+
 
 .username label,
 .contrasena label {
@@ -184,6 +204,7 @@ form .contrasena {
     transform: translateY(-100%);
 }
 
+
 .username span::before,
 .contrasena span::before {
     content: '';
@@ -196,6 +217,7 @@ form .contrasena {
     transition: .5s;
 }
 
+
 .username input:focus~label,
 .contrasena input:focus~label {
     top: -25px;
@@ -204,10 +226,12 @@ form .contrasena {
     font-size: 15px;
 }
 
+
 .username input:focus~ span::before,
 .contrasena input:focus~ span::before {
     width: 100%;
 }
+
 
 .boton {
     width: 100%;
@@ -222,20 +246,24 @@ form .contrasena {
     margin-bottom: 15px;
 }
 
+
 .boton:hover {
     border-color: #5F814F;
     transition: .5s;
 }
+
 
 .registro {
     text-align: center;
     font-size: 16px;
 }
 
+
 .registro a {
     color: #5F814F;
     text-decoration: underline;
 }
+
 
 .registrate {
     cursor: pointer;
