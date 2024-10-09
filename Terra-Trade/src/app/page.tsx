@@ -11,13 +11,8 @@ const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-
-  const handleCloseModal = () => {
+  
+const handleCloseModal = () => {
     setModalOpen(false);
   };
 
@@ -27,25 +22,17 @@ const Home = () => {
     setLoginModalOpen(true);
   };
 
-
+  
   const handleCloseLoginModal = () => {
     setLoginModalOpen(false);
   };
-
-
-  function HomePage(){
-    return (
-      <div>HomePage</div>
-    )
-  }
-
-
-  return (
+  
+return (
     <div style={{ backgroundColor: '#20493C', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <Head>
         <title>Home</title>
       </Head>
-     
+
       <div className="imagen-y-frase" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%' }}>
         <div className="imagen" style={{ flex: 1 }}>
           <Image
@@ -57,9 +44,7 @@ const Home = () => {
         </div>
         <div className="frase" style={{ flex: 1, color: 'white', textAlign: 'right' }}>
           <h1 style={{ fontSize: '3rem' }}>Empieza a invertir en <br /> terrenos desde la <br /> comodidad de tu casa</h1>
-          <div className="comenzar-btn" style={{ marginTop: '20px' }}>
-            <button style={{ backgroundColor: '#9DBFA4', border: 'none', padding: '10px 20px', borderRadius: '5px', color: 'white' }} onClick={handleOpenModal}>Comenzar</button>
-          </div>
+        
         </div>
       </div>
       {isModalOpen && <Modal onClose={handleCloseModal} onOpenLoginModal={handleOpenLoginModal} />}
