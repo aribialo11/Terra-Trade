@@ -15,7 +15,7 @@
 
       if(typeof body.precio !== "number" )
         {
-          body.precio = [parseInt(body.precio)]; // Convertir precio en array con el número
+          body.precio = [parseInt(body.precio)]; 
         } 
       else {
           body.precio = [body.precio];

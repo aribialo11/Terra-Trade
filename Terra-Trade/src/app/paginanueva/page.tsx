@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/image';  // Ya está importado correctamente
 
 interface Propiedad {
   id: number;
@@ -61,7 +61,7 @@ const Page: React.FC = () => {
   
   return (
     <div className="container">
-      {/* Form */}
+      {/* Formulario */}
       <div className="Formulario">
         <h2 className="titulo">Agregar Nueva Propiedad</h2>
         <form id="Formulario" onSubmit={addProperty} ref={formRef}>
@@ -82,16 +82,22 @@ const Page: React.FC = () => {
 
       {/* Contenedor de propiedades */}
       <div id="properties-container" className="properties-container">
-        {propiedades.map((propiedades) => (
-          <div key={propiedades.id} className="property">
-            <button className="delete-button" onClick={() => deleteProperty(propiedades.id)}>
+        {propiedades.map((propiedad) => (
+          <div key={propiedad.id} className="property">
+            <button className="delete-button" onClick={() => deleteProperty(propiedad.id)}>
               Eliminar
             </button>
-            <Image src={propiedades.url_de_la_imagen} alt={propiedades.nombre} />
-            <h2>{propiedades.nombre}</h2>
-            <p>Dirección: {propiedades.direccion}</p>
-            <p>Barrio: {propiedades.barrio}</p>
-            <p>Precio: ${propiedades.precio}</p>
+            <Image 
+              src={propiedad.url_de_la_imagen} 
+              alt={`Imagen de ${propiedad.nombre}`} // Línea añadida para manejar el alt
+              width={500}  // Ajusta el tamaño según sea necesario
+              height={300} 
+              priority // Se carga con prioridad
+            />
+            <h2>{propiedad.nombre}</h2>
+            <p>Dirección: {propiedad.direccion}</p>
+            <p>Barrio: {propiedad.barrio}</p>
+            <p>Precio: ${propiedad.precio}</p>
           </div>
         ))}
       </div>
