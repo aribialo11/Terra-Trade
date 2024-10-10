@@ -1,37 +1,40 @@
-import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+  import { NextResponse } from 'next/server';
+  import { createClient } from '@/app/utils/supabase/server'
+  import { cookies } from 'next/headers'
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+  export async function POST(req: Request) {
+    try {
+      const body = await req.json();
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase URL or Key environment variables');
-}
+      if (!body.nombre || !body.direccion || !body.barrio || !body.precio || !body.url_de_la_imagen) {
+        return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
+      }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+      const cookieStore = cookies()
+      const supabase = createClient(cookieStore)
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
+      if(typeof body.precio !== "number" )
+        {
+          body.precio = [parseInt(body.precio)]; 
+        } 
+      else {
+          body.precio = [body.precio];
+        }
 
-    if (!body.nombre || !body.direccion || !body.barrio || !body.precio || !body.url_de_la_imagen) {
-      return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
+      const { data, error } = await supabase
+        .from('propiedades')
+        .insert(body);
+
+      if (error) {
+        console.error('Error de Supabase:', error); 
+        throw error;
+      }
+
+      console.log('Data inserted into Supabase:', data);
+
+      return NextResponse.json(data, { status: 200 });
+    } catch (error: any) {
+      console.error('Error inserting data into Supabase:', error);
+      return NextResponse.json({ message: 'Error inserting data into Supabase', error: error.message }, { status: 500 });
     }
-
-    const { data, error } = await supabase
-      .from('Propiedades')
-      .insert([body]);
-
-    if (error) {
-      console.error('Error de Supabase:', error); 
-      throw error;
-    }
-
-    console.log('Data inserted into Supabase:', data);
-
-    return NextResponse.json(data, { status: 200 });
-  } catch (error: any) {
-    console.error('Error inserting data into Supabase:', error);
-    return NextResponse.json({ message: 'Error inserting data into Supabase', error: error.message }, { status: 500 });
   }
-}
