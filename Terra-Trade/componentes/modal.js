@@ -1,10 +1,11 @@
 import React from 'react';
+
 const Modal = ({ onClose, onOpenLoginModal }) => {
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.modalContent}>
         <button onClick={onClose} style={styles.closeButton}>x</button>
-        <button style={styles.button}>Iniciar sesión con Google</button>
+        <button onClick={onOpenLoginModal} style={styles.button}>Iniciar sesión con Google</button>
       </div>
     </div>
   );
@@ -73,16 +74,6 @@ const styles = {
     borderRadius: '20px',
     padding: '10px 20px',
     marginTop: '40px',
-    cursor: 'pointer',
-    width: '100%',
-  },
-  buttonBlack: {
-    backgroundColor: 'black',
-    color: 'white',
-    border: 'none',
-    borderRadius: '20px',
-    padding: '10px 20px',
-    marginTop: '20px',
     cursor: 'pointer',
     width: '100%',
   },

@@ -33,9 +33,7 @@ export default function RootLayout({
           <span>Perfil</span>
           <span>Preguntas frecuentes</span>
         </div>
-        <div className="comenzar-btn" style={{ marginRight: '5px' }}>
-            <button style={{ backgroundColor: '#9DBFA4', border: 'none', padding: '10px 20px', borderRadius: '5px', color: 'white' }} >Login</button>
-          </div>
+        
       </div>
       
       </body>
