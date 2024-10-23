@@ -62,6 +62,7 @@ const Home = () => {
         </div>
         
       </div>
+    
 
       {isModalOpen && <Modal onClose={handleCloseModal} onOpenLoginModal={handleOpenLoginModal} />}
       {isLoginModalOpen && <LoginModal onClose={handleCloseLoginModal} />}
