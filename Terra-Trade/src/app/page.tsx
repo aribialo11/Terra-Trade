@@ -40,6 +40,12 @@ const Home = () => {
             width={1000}
             height={1000}
           />
+          <Image
+              src="/imagenes/logoo.png"
+              alt='hola'
+              height={100}
+              width={100}
+            />
         </div>
         <div className="frase" style={{ flex: 1, color: 'white', textAlign: 'right' }}>
           <h1 style={{ fontSize: '3rem' }}>Empieza a invertir en <br /> terrenos desde la <br /> comodidad de tu casa</h1>
