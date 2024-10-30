@@ -39,7 +39,7 @@ const FAQ = () => {
         <title>Preguntas Frecuentes</title>
       </Head>
 
-      <h1 style={{ color: 'white', fontSize: '3rem', marginBottom: '30px' }}>Preguntas Frecuentes</h1>
+      <h1 style={{ color: 'white', fontSize: '3rem', marginBottom: '30px' , marginTop:"100px" }}>Preguntas Frecuentes</h1>
 
       <div style={{ width: '80%', maxWidth: '800px' }}>
         {questions.map((item, index) => (

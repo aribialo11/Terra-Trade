@@ -45,7 +45,7 @@ const Home = () => {
         <div className="frase" style={{ flex: 1, color: 'white', textAlign: 'right' }}>
           <h1 style={{ fontSize: '3rem' }}>Empieza a invertir en <br /> terrenos desde la <br /> comodidad de tu casa</h1>
           <div className="comenzar-btn" style={{ marginTop: '20px' }}>
-            <button style={{ backgroundColor: '#9DBFA4', border: 'none', padding: '10px 20px', borderRadius: '5px', color: 'white' }} onClick={handleOpenModal}>Login</button>
+            <button style={{ backgroundColor: '#9DBFA4', border: 'none', padding: '10px 20px', borderRadius: '5px', color: 'white' }} onClick={handleOpenModal}>Comenzar</button>
           </div>
         </div>
       </div>

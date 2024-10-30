@@ -27,12 +27,15 @@ export default function RootLayout({
           TerraTrade
         </div>
         
-        <div style={{ display: 'flex', gap: '50px', color: 'white', cursor: 'pointer', justifyContent: 'center', flex: 1 }}>
+        <div style={{ display: 'flex', gap: '70px', color: 'white', cursor: 'pointer', justifyContent: 'center', flex: 1 }}>
           <span>Home</span>
           <span>Servicios</span>
           <span>Acerca de nosotros</span>
           <span>Perfil</span>
           <span>Preguntas frecuentes</span>
+        </div>
+        <div style={{ cursor: 'pointer'}}>
+          <img src="/imagenes/personita.png" width={80} height={80} />
         </div>
         
       </div>
