@@ -26,6 +26,7 @@ export default function RootLayout({
         <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
           TerraTrade
         </div>
+        
         <div style={{ display: 'flex', gap: '50px', color: 'white', cursor: 'pointer', justifyContent: 'center', flex: 1 }}>
           <span>Home</span>
           <span>Servicios</span>
