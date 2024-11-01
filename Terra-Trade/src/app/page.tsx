@@ -34,7 +34,7 @@ const Home = () => {
 
       <div className="imagen-y-frase" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%' }}>
         <div className="imagen" style={{ flex: 1 }}>
-          <Image
+          <Image onClick={handleOpenModal}
             src="/imagenes/logo.png"
             alt="Logo"
             width={1000}
