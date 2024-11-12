@@ -1,8 +1,10 @@
+// Transferencia page.tsx
 import Image from 'next/image';
+import Link from 'next/link'; // Importamos Link
 
 export default function Transferencia() {
   return (
-    <div style={{ backgroundColor: '#20493C', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' , marginTop:"10px" }}>
+    <div style={{ backgroundColor: '#20493C', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: "10px" }}>
       {/* Título de la página */}
       <h1 style={{ color: 'white', fontFamily: 'Arial', fontSize: '28px', marginBottom: '20px' }}>Transferencia</h1>
 
@@ -70,6 +72,26 @@ export default function Transferencia() {
             width={50}
           />
         </div>
+
+        {/* Botón para redirigir a la página de Perfil */}
+        <Link href="/perfil" passHref>
+          <button
+            style={{
+              backgroundColor: '#91C390',
+              color: 'white',
+              fontFamily: 'Arial',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              padding: '15px 30px',
+              borderRadius: '20px',
+              marginTop: '20px',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Ir al Perfil
+          </button>
+        </Link>
       </div>
     </div>
   );

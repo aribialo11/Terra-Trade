@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,26 +19,36 @@ export default function RootLayout({
         <title>{String(metadata.title ?? 'Default Title')}</title>
         <meta name="description" content={String(metadata.description ?? 'Default description')} />
       </head>
-      <body> 
+      <body>
         {children}
-      <div className="navbar" style={{ position: 'absolute', top: '0', width: '100%', display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#20493C' }}>
-        <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
-          TerraTrade
+        <div className="navbar" style={{ position: 'absolute', top: '0', width: '100%', display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#20493C' }}>
+          <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
+            TerraTrade
+          </div>
+
+          <div style={{ display: 'flex', gap: '70px', color: 'white', cursor: 'pointer', justifyContent: 'center', flex: 1 }}>
+            <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Home</span>
+            </Link>
+            <Link href="/servicios" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Servicios</span>
+            </Link>
+            <Link href="/acerca-de-nosotros" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Acerca de nosotros</span>
+            </Link>
+            <Link href="/perfil" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Perfil</span>
+            </Link>
+            <Link href="/preguntasFrecuentes" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Preguntas frecuentes</span>
+            </Link>
+          </div>
+          <div style={{ cursor: 'pointer' }}>
+            <img src="/imagenes/personita.png" width={80} height={80} />
+          </div>
+
         </div>
-        
-        <div style={{ display: 'flex', gap: '70px', color: 'white', cursor: 'pointer', justifyContent: 'center', flex: 1 }}>
-          <span>Home</span>
-          <span>Servicios</span>
-          <span>Acerca de nosotros</span>
-          <span>Perfil</span>
-          <span>Preguntas frecuentes</span>
-        </div>
-        <div style={{ cursor: 'pointer'}}>
-          <img src="/imagenes/personita.png" width={80} height={80} />
-        </div>
-        
-      </div>
-      
+
       </body>
     </html>
   );
