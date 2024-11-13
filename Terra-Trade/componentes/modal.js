@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Modal = ({ onClose, onOpenLoginModal }) => {
   return (
@@ -26,6 +26,58 @@ const LoginModal = ({ onClose }) => {
           <input type="password" style={styles.input} />
         </label>
         <button style={styles.button}>Entrar</button>
+      </div>
+    </div>
+  );
+};
+
+const UploadModal = ({ onClose }) => {
+  const [nombre, setNombre] = useState('');
+  const [ubicacion, setUbicacion] = useState('');
+  const [precio, setPrecio] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Lógica para manejar la subida del terreno
+    console.log("Terreno Subido:", { nombre, ubicacion, precio });
+    onClose();
+  };
+
+  return (
+    <div style={styles.modalOverlay}>
+      <div style={styles.modalContent}>
+        <button onClick={onClose} style={styles.closeButton}>x</button>
+        <h2>Subir Terreno</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Nombre del Terreno
+            <input
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              style={styles.input}
+            />
+          </label>
+          <label>
+            Ubicación
+            <input
+              type="text"
+              value={ubicacion}
+              onChange={(e) => setUbicacion(e.target.value)}
+              style={styles.input}
+            />
+          </label>
+          <label>
+            Precio
+            <input
+              type="number"
+              value={precio}
+              onChange={(e) => setPrecio(e.target.value)}
+              style={styles.input}
+            />
+          </label>
+          <button type="submit" style={styles.button}>Subir Terreno</button>
+        </form>
       </div>
     </div>
   );
@@ -73,7 +125,7 @@ const styles = {
     border: 'none',
     borderRadius: '20px',
     padding: '10px 20px',
-    marginTop: '40px',
+    marginTop: '20px',
     cursor: 'pointer',
     width: '100%',
   },
@@ -86,4 +138,4 @@ const styles = {
   },
 };
 
-export { Modal, LoginModal };
+export { Modal, LoginModal, UploadModal };
