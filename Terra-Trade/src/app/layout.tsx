@@ -30,10 +30,8 @@ export default function RootLayout({
             <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
               <span>Home</span>
             </Link>
-            <Link href="/servicios" style={{ textDecoration: 'none', color: 'white' }}>
-              <span>Servicios</span>
-            </Link>
-            <Link href="/acerca-de-nosotros" style={{ textDecoration: 'none', color: 'white' }}>
+            
+            <Link href="/acercaDeNosotros" style={{ textDecoration: 'none', color: 'white' }}>
               <span>Acerca de nosotros</span>
             </Link>
             <Link href="/perfil" style={{ textDecoration: 'none', color: 'white' }}>

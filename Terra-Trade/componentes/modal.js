@@ -1,83 +1,87 @@
 import React, { useState } from 'react';
 
-const Modal = ({ onClose, onOpenLoginModal }) => {
+const Modal = ({ onClose, onOpenLoginModal, onOpenRegisterModal }) => {
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.modalContent}>
-        <button onClick={onClose} style={styles.closeButton}>x</button>
-        <button onClick={onOpenLoginModal} style={styles.button}>Iniciar sesión con Google</button>
+        <button onClick={onClose} style={styles.closeButton}>
+          x
+        </button>
+        <br></br>
+        <button onClick={onOpenLoginModal} style={styles.button}>
+          Iniciar sesión
+        </button>
+        <button onClick={onOpenRegisterModal} style={styles.button}>
+          Registrarse
+        </button>
       </div>
     </div>
   );
 };
 
-const LoginModal = ({ onClose }) => {
+const LoginModal = ({ onClose, onOpenRegisterModal }) => {
+  const handleRegisterClick = () => {
+    onClose(); // Cierra el modal de inicio de sesión
+    setTimeout(() => {
+      onOpenRegisterModal(); // Abre el modal de registro después de un breve delay
+    }, 200); // Delay corto para evitar problemas visuales
+  };
+
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.modalContent}>
-        <button onClick={onClose} style={styles.closeButton}>x</button>
-        <h2>Inicio de sesión</h2>
+        <button onClick={onClose} style={styles.closeButton}>
+          x
+        </button>
+        <h2>INICIO DE SESIÓN</h2>
         <label>
-          Usuario
+          Nombre
+          <input type="text" style={styles.input} />
+        </label>
+        <label>
+          Apellido
           <input type="text" style={styles.input} />
         </label>
         <label>
           Contraseña
           <input type="password" style={styles.input} />
         </label>
+        <p style={{ margin: '10px 0' }}>
+          ¿No tenés un perfil hecho?{' '}
+          <span
+            onClick={handleRegisterClick}
+            style={{ color: 'blue', cursor: 'pointer' }}
+          >
+            Registrate acá
+          </span>
+        </p>
         <button style={styles.button}>Entrar</button>
       </div>
     </div>
   );
 };
 
-const UploadModal = ({ onClose }) => {
-  const [nombre, setNombre] = useState('');
-  const [ubicacion, setUbicacion] = useState('');
-  const [precio, setPrecio] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica para manejar la subida del terreno
-    console.log("Terreno Subido:", { nombre, ubicacion, precio });
-    onClose();
-  };
-
+const RegisterModal = ({ onClose }) => {
   return (
     <div style={styles.modalOverlay}>
       <div style={styles.modalContent}>
-        <button onClick={onClose} style={styles.closeButton}>x</button>
-        <h2>Subir Terreno</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Nombre del Terreno
-            <input
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              style={styles.input}
-            />
-          </label>
-          <label>
-            Ubicación
-            <input
-              type="text"
-              value={ubicacion}
-              onChange={(e) => setUbicacion(e.target.value)}
-              style={styles.input}
-            />
-          </label>
-          <label>
-            Precio
-            <input
-              type="number"
-              value={precio}
-              onChange={(e) => setPrecio(e.target.value)}
-              style={styles.input}
-            />
-          </label>
-          <button type="submit" style={styles.button}>Subir Terreno</button>
-        </form>
+        <button onClick={onClose} style={styles.closeButton}>
+          x
+        </button>
+        <h2>REGISTRO</h2>
+        <label>
+          Nombre
+          <input type="text" style={styles.input} />
+        </label>
+        <label>
+          Apellido
+          <input type="text" style={styles.input} />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" style={styles.input} />
+        </label>
+        <button style={styles.button}>Registrarse</button>
       </div>
     </div>
   );
@@ -138,4 +142,4 @@ const styles = {
   },
 };
 
-export { Modal, LoginModal, UploadModal };
+export { Modal, LoginModal, RegisterModal };
