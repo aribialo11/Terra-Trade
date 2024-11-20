@@ -40,6 +40,9 @@ export default function RootLayout({
             <Link href="/preguntasFrecuentes" style={{ textDecoration: 'none', color: 'white' }}>
               <span>Preguntas frecuentes</span>
             </Link>
+            <Link href="/paginaPrincipal" style={{ textDecoration: 'none', color: 'white' }}>
+              <span>Ver propiedades</span>
+            </Link>
           </div>
           <div style={{ cursor: 'pointer' }}>
             <img src="/imagenes/personita.png" width={80} height={80} />

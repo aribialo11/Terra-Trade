@@ -73,25 +73,7 @@ export default function Transferencia() {
           />
         </div>
 
-        {/* Botón para redirigir a la página de Perfil */}
-        <Link href="/perfil" passHref>
-          <button
-            style={{
-              backgroundColor: '#91C390',
-              color: 'white',
-              fontFamily: 'Arial',
-              fontSize: '18px',
-              fontWeight: 'bold',
-              padding: '15px 30px',
-              borderRadius: '20px',
-              marginTop: '20px',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            Ir al Perfil
-          </button>
-        </Link>
+
       </div>
     </div>
   );
