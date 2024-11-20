@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -45,7 +46,12 @@ export default function RootLayout({
             </Link>
           </div>
           <div style={{ cursor: 'pointer' }}>
-            <img src="/imagenes/personita.png" width={80} height={80} />
+            <Image
+              src="/imagenes/personita.png"
+              alt="personita inicio de sesion"
+              width={80}
+              height={80}
+            />
           </div>
 
         </div>
