@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importar el hook useRouter
 
 const Perfil = () => {
   const [mostrarDatos, setMostrarDatos] = useState(false);
   const [mostrarPropiedades, setMostrarPropiedades] = useState(false);
+
+  const router = useRouter(); // Instancia del router
 
   const handleDatosClick = () => {
     setMostrarDatos(!mostrarDatos);
@@ -16,58 +19,36 @@ const Perfil = () => {
     setMostrarDatos(false); // Cerrar "Datos" si se abre "Propiedades"
   };
 
-  const handleCloseAll = () => {
-    setMostrarDatos(false);
-    setMostrarPropiedades(false);
+  const handleSubirTerrenoClick = () => {
+    router.push('/propiedades'); // Redirigir a la página de propiedades
   };
 
   return (
-    <div style={{ backgroundColor: '#20493C', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' , marginTop:'100px' }}>
+    <div
+      style={{
+        backgroundColor: '#20493C', // Fondo uniforme
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start', // Alinear elementos al inicio
+        paddingTop: '150px', // Espacio entre el menú superior y el contenido
+        overflowY: 'auto', // Habilitar desplazamiento si es necesario
+        height: '100vh',
+      }}
+    >
       {/* Botones de perfil */}
-      {(!mostrarDatos && !mostrarPropiedades) ? (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginTop: '50px' }}>
-          <div style={{ display: 'flex', gap: '20px' }}>
-            <button
-              onClick={handleDatosClick}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                fontFamily: 'Arial',
-                fontSize: '2rem',
-                fontWeight: 'bold',
-                padding: '30px 60px',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                border: 'none',
-                width: '250px',
-                height: '120px',
-              }}
-            >
-              Datos
-            </button>
-
-            <button
-              onClick={handlePropiedadesClick}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                fontFamily: 'Arial',
-                fontSize: '2rem',
-                fontWeight: 'bold',
-                padding: '30px 60px',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                border: 'none',
-                width: '300px',
-                height: '120px',
-              }}
-            >
-            Propiedades
-            </button>
-          </div>
-
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '20px',
+          marginTop: '50px',
+        }}
+      >
+        <div style={{ display: 'flex', gap: '20px' }}>
           <button
-            onClick={handleCloseAll}
+            onClick={handleDatosClick}
             style={{
               backgroundColor: 'white',
               color: 'black',
@@ -78,29 +59,8 @@ const Perfil = () => {
               borderRadius: '20px',
               cursor: 'pointer',
               border: 'none',
-              width: '250px',
+              width: '400px',
               height: '150px',
-            }}
-          >
-            Subir terreno
-          </button>
-        </div>
-      ) : (
-        <div style={{ display: 'flex', gap: '20px', marginTop: '50px' }}>
-          <button
-            onClick={handleDatosClick}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              fontFamily: 'Arial',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              padding: '20px 40px',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              border: 'none',
-              width: '200px',
-              height: '100px',
             }}
           >
             Datos
@@ -112,41 +72,40 @@ const Perfil = () => {
               backgroundColor: 'white',
               color: 'black',
               fontFamily: 'Arial',
-              fontSize: '1.5rem',
+              fontSize: '2rem',
               fontWeight: 'bold',
-              padding: '20px 40px',
+              padding: '30px 60px',
               borderRadius: '20px',
               cursor: 'pointer',
               border: 'none',
-              width: '200px',
-              height: '100px',
+              width: '400px',
+              height: '150px',
             }}
           >
-            Propiedades
-          </button>
-
-          <button
-            onClick={handleCloseAll}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              fontFamily: 'Arial',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              padding: '20px 40px',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              border: 'none',
-              width: '200px',
-              height: '100px',
-            }}
-          >
-            Subir terreno
+            Mis propiedades
           </button>
         </div>
-      )}
 
-      {/* Sección de datos del usuario */}
+        <button
+          onClick={handleSubirTerrenoClick} // Cambiar acción a redirección
+          style={{
+            backgroundColor: 'white',
+            color: 'black',
+            fontFamily: 'Arial',
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            padding: '30px 60px',
+            borderRadius: '20px',
+            cursor: 'pointer',
+            border: 'none',
+            width: '400px',
+            height: '150px',
+          }}
+        >
+          Subir terreno
+        </button>
+      </div>
+
       {mostrarDatos && (
         <div
           style={{
@@ -158,24 +117,13 @@ const Perfil = () => {
             borderRadius: '20px',
             marginTop: '30px',
             width: '60%',
-            display: 'flex',
-            justifyContent: 'space-between',
           }}
         >
-          <div>
-            <p><strong>Nombre:</strong> [Nombre del usuario]</p>
-            <p><strong>Apellido:</strong> [Apellido del usuario]</p>
-            <p><strong>Correo electrónico:</strong> [Correo del usuario]</p>
-            <p><strong>Edad:</strong> [Edad del usuario]</p>
-          </div>
-          <div>
-            <p><strong>Oficio:</strong> [Oficio del usuario]</p>
-            <p><strong>Se unió el:</strong> [Fecha de unión]</p>
-          </div>
+          <h3>Datos personales</h3>
+          <p>Aquí van los datos personales del usuario...</p>
         </div>
       )}
 
-      {/* Sección de propiedades del usuario */}
       {mostrarPropiedades && (
         <div
           style={{
@@ -186,84 +134,11 @@ const Perfil = () => {
             padding: '20px',
             borderRadius: '20px',
             marginTop: '30px',
-            width: '80%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            width: '60%',
           }}
         >
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            gap: '20px',
-            width: '100%',
-          }}>
-            {/* Propiedad 1 */}
-            <div style={{
-              backgroundColor: 'white',
-              padding: '15px',
-              borderRadius: '15px',
-              width: '45%',
-              textAlign: 'center',
-            }}>
-              <div style={{ backgroundColor: 'black', width: '100%', height: '100px', borderRadius: '10px', marginBottom: '10px' }}></div>
-              <p><strong>Nombre de la propiedad:</strong> Propiedad 1</p>
-              <p><strong>Metros:</strong> 200 m²</p>
-              <p><strong>Valor:</strong> $100,000</p>
-              <p><strong>Ubicación:</strong> Ciudad XYZ</p>
-              <p><strong>Descripción:</strong> Una descripción breve de la propiedad.</p>
-              <button style={{
-                backgroundColor: '#20493C',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                border: 'none',
-                marginTop: '10px',
-              }}>
-                Ir al perfil del vendedor
-              </button>
-            </div>
-
-            {/* Propiedad 2 */}
-            <div style={{
-              backgroundColor: 'white',
-              padding: '15px',
-              borderRadius: '15px',
-              width: '45%',
-              textAlign: 'center',
-            }}>
-              <div style={{ backgroundColor: 'black', width: '100%', height: '100px', borderRadius: '10px', marginBottom: '10px' }}></div>
-              <p><strong>Nombre de la propiedad:</strong> Propiedad 2</p>
-              <p><strong>Metros:</strong> 300 m²</p>
-              <p><strong>Valor:</strong> $150,000</p>
-              <p><strong>Ubicación:</strong> Ciudad ABC</p>
-              <p><strong>Descripción:</strong> Otra descripción breve de la propiedad.</p>
-              <button style={{
-                backgroundColor: '#20493C',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                border: 'none',
-                marginTop: '10px',
-              }}>
-                Ir al perfil del vendedor
-              </button>
-            </div>
-          </div>
-
-          <button style={{
-            backgroundColor: '#20493C',
-            color: 'white',
-            padding: '10px 20px',
-            borderRadius: '10px',
-            cursor: 'pointer',
-            border: 'none',
-            marginTop: '20px',
-          }}>
-            Más
-          </button>
+          <h3>Mis Propiedades</h3>
+          <p>Aquí se enlistarán las propiedades del usuario...</p>
         </div>
       )}
     </div>

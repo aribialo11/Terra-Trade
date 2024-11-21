@@ -85,9 +85,17 @@ export default function Transferencia() {
           />
           <button onClick={sendTransaction} style={{ padding: '10px 20px', borderRadius: '10px', backgroundColor: '#20493C', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>Enviar</button>
 
+<<<<<<< HEAD
           <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px', cursor: 'pointer' }}>
             <div>
               <Image src="/imagenes/enviar.png" alt="Enviar" height={60} width={60} />
             </div>
             <div>
               <Image src
+=======
+
+      </div>
+    </div>
+  );
+}
+>>>>>>> 8365a5b06a3cdd4a7d3b4a03d19ca06b0507b913
