@@ -41,7 +41,7 @@ export default function RootLayout({
               <span>Preguntas frecuentes</span>
             </Link>
             <Link href="/paginaPrincipal" style={{ textDecoration: 'none', color: 'white' }}>
-              <span>Ver propiedades</span>
+              <span>Ver Propiedades</span>
             </Link>
           </div>
           <div style={{ cursor: 'pointer' }}>
