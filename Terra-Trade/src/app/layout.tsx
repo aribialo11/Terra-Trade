@@ -20,8 +20,7 @@ export default function RootLayout({
         <title>{String(metadata.title ?? 'Default Title')}</title>
         <meta name="description" content={String(metadata.description ?? 'Default description')} />
       </head>
-      <body>
-        {children}
+      <body className='body-test'>
         <div className="navbar" style={{ position: 'absolute', top: '0', width: '100%', display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#20493C' }}>
           <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
             TerraTrade
@@ -55,7 +54,7 @@ export default function RootLayout({
           </div>
 
         </div>
-
+        {children}
       </body>
     </html>
   );
