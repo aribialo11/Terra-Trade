@@ -1,28 +1,46 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import web3 from '../utils/web3'; 
+import { useEffect, useState } from "react";
+import { initWeb3, getContract } from "../utils/contract";
 
-const PaginaPrincipal = () => {
+export default function Home() {
+  const [account, setAccount] = useState(null);
+  const [contractData, setContractData] = useState(null);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const checkInfuraConnection = async () => {
+    const initialize = async () => {
       try {
-        const blockNumber = await web3.eth.getBlockNumber();
-        console.log('Conexión exitosa. El número del bloque más reciente es:', blockNumber);
+        // Inicializar Web3 y el contrato
+        await initWeb3();
+
+        // Obtener la cuenta activa de MetaMask
+        const web3 = getContract()._provider;
+        const accounts = await web3.eth.getAccounts();
+        if (accounts.length === 0) {
+          throw new Error("No hay cuentas conectadas a MetaMask.");
+        }
+        setAccount(accounts[0]);
+
+        // Interactuar con el contrato (ejemplo: llamar a la función `getData`)
+        const contract = getContract();
+        const data = await contract.methods.getData().call();
+        setContractData(data);
       } catch (error) {
-        console.error('Error al conectar con Infura:', error);
+        console.error("Error durante la inicialización:", error);
+        setError(error.message);
       }
     };
 
-    checkInfuraConnection();
-  }, []); 
+    initialize();
+  }, []);
 
   return (
-    <div style={{ marginTop: '200px' }}>
-      <h1>Verificación de Conexión a Infura</h1>
-      <p>Revisa la consola para ver el resultado de la conexión.</p>
+    <div>
+      <h1>Conexión con MetaMask y Sepolia</h1>
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      <p><strong>Cuenta conectada:</strong> {account || "No conectado"}</p>
+      <p><strong>Datos del contrato:</strong> {contractData || "Cargando..."}</p>
     </div>
-  );  
-};
-
-export default PaginaPrincipal;
+  );
+}
