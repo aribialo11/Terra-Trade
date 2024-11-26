@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -20,7 +19,7 @@ export default function RootLayout({
         <title>{String(metadata.title ?? 'Default Title')}</title>
         <meta name="description" content={String(metadata.description ?? 'Default description')} />
       </head>
-      <body className='body-test'>
+      <body style={{ backgroundColor: '#20493C', margin: 0, padding: 0 }}>
         <div className="navbar" style={{ position: 'absolute', top: '0', width: '100%', display: 'flex', justifyContent: 'space-between', padding: '20px', backgroundColor: '#20493C' }}>
           <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold', cursor: 'pointer' }}>
             TerraTrade
@@ -30,7 +29,6 @@ export default function RootLayout({
             <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
               <span>Home</span>
             </Link>
-            
             <Link href="/acercaDeNosotros" style={{ textDecoration: 'none', color: 'white' }}>
               <span>Acerca de nosotros</span>
             </Link>
@@ -41,7 +39,7 @@ export default function RootLayout({
               <span>Preguntas frecuentes</span>
             </Link>
             <Link href="/paginaPrincipal" style={{ textDecoration: 'none', color: 'white' }}>
-              <span>Ver Propiedades</span>
+              <span>Terrenos</span>
             </Link>
           </div>
           <div style={{ cursor: 'pointer' }}>
@@ -52,9 +50,10 @@ export default function RootLayout({
               height={80}
             />
           </div>
-
         </div>
-        {children}
+        <div style={{  minHeight: '100vh', color: 'white' }}>
+          {children}
+        </div>
       </body>
     </html>
   );
