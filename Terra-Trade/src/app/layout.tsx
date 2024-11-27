@@ -14,7 +14,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         style={{
           backgroundColor: '#20493C', // Fondo uniforme
-          color: 'white', // Texto blanco
           margin: '0',
           fontFamily: 'Arial, sans-serif',
         }}
@@ -31,16 +30,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             zIndex: 1000, // Asegura que el menú quede encima del contenido
           }}
         >
-          <div
-            style={{
-              color: 'white',
-              fontSize: '24px',
+          
+          <Link href="/" style={{ textDecoration: 'none', color: 'white', fontSize: '24px',
               fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            TerraTrade
-          </div>
+              cursor: 'pointer', }}>
+              <div>Terratrade</div>
+            </Link>
           <nav
             style={{
               display: 'flex',
@@ -90,7 +85,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Contenido principal */}
-        <main style={{ paddingTop: '100px', minHeight: '100vh' }}>
+        <main style={{ paddingTop: '10px', minHeight: '100vh' }}>
           {children}
         </main>
       </body>

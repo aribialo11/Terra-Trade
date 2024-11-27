@@ -3,12 +3,10 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Modal, LoginModal, RegisterModal } from '../../componentes/modal';
+import Link from 'next/link';
 
 const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -16,24 +14,6 @@ const Home = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
-  };
-
-  const handleOpenLoginModal = () => {
-    setModalOpen(true);
-    setLoginModalOpen(true);
-  };
-
-  const handleCloseLoginModal = () => {
-    setLoginModalOpen(false);
-  };
-
-  const handleOpenRegisterModal = () => {
-    setModalOpen(true);
-    setRegisterModalOpen(true);
-  };
-
-  const handleCloseRegisterModal = () => {
-    setRegisterModalOpen(false);
   };
 
   return (
@@ -63,7 +43,6 @@ const Home = () => {
       >
         <div className="imagen" style={{ flex: 1 }}>
           <Image
-            onClick={handleOpenModal}
             src="/imagenes/logo.png"
             alt="Logo"
             width={1000}
@@ -86,6 +65,7 @@ const Home = () => {
                 padding: '10px 20px',
                 borderRadius: '5px',
                 color: 'white',
+                cursor: 'pointer',
               }}
               onClick={handleOpenModal}
             >
@@ -95,21 +75,84 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Modal */}
       {isModalOpen && (
-        <Modal
-          onClose={handleCloseModal}
-          onOpenLoginModal={handleOpenLoginModal}
-          onOpenRegisterModal={handleOpenRegisterModal}
-        />
-      )}
-      {isLoginModalOpen && (
-        <LoginModal
-          onClose={handleCloseLoginModal}
-          onOpenRegisterModal={handleOpenRegisterModal}
-        />
-      )}
-      {isRegisterModalOpen && (
-        <RegisterModal onClose={handleCloseRegisterModal} />
+        <div
+          style={{
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: '#fff',
+              padding: '20px',
+              borderRadius: '10px',
+              width: '300px',
+              textAlign: 'center',
+            }}
+          >
+            <h2 style={{ marginBottom: '20px', color: '#20493C' }}>
+              ¿Qué deseas hacer?
+            </h2>
+            <div style={{ marginBottom: '10px' }}>
+              <Link href="/login">
+                <button
+                  style={{
+                    backgroundColor: '#9DBFA4',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                    color: 'white',
+                    cursor: 'pointer',
+                    width: '100%',
+                  }}
+                >
+                  Iniciar sesión
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link href="/register">
+                <button
+                  style={{
+                    backgroundColor: '#9DBFA4',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '5px',
+                    color: 'white',
+                    cursor: 'pointer',
+                    width: '100%',
+                  }}
+                >
+                  Registro
+                </button>
+              </Link>
+            </div>
+            <button
+              style={{
+                marginTop: '20px',
+                backgroundColor: '#20493C',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                color: 'white',
+                cursor: 'pointer',
+              }}
+              onClick={handleCloseModal}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
