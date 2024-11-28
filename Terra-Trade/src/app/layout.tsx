@@ -20,8 +20,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <header
           style={{
-            position: 'absolute',
             top: '0',
+            position: 'absolute' ,
             width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <span>Preguntas frecuentes</span>
             </Link>
             <Link
-              href="/paginaPrincipal"
+              href="/paginanueva"
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <span>Terrenos</span>
@@ -84,8 +84,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </header>
 
+        {/* Línea blanca separadora */}
+        <div
+          style={{
+            width: '100%',
+            height: '1px',
+            backgroundColor: 'white',
+            
+          }}
+        ></div>
+
         {/* Contenido principal */}
-        <main style={{ paddingTop: '10px', minHeight: '100vh' }}>
+        <main style={{  paddingTop: '20px' , minHeight: '100vh' }}>
           {children}
         </main>
       </body>
