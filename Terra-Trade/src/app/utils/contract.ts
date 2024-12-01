@@ -809,27 +809,24 @@ const CONTRACT_ABI = [
 }
 
 
+
 ];
 
-let web3: Web3 | null = null;
-let contractInstance: any | null = null;
-
-export const initWeb3 = async (): Promise<Web3> => {
-  if (typeof window.ethereum !== "undefined") {
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-    web3 = new Web3(window.ethereum);
+// Función para inicializar Web3
+export const initWeb3 = async () => {
+  if (window.ethereum) {
+    const web3 = new Web3(window.ethereum);
+    await window.ethereum.request({ method: "eth_requestAccounts" }); // Solicita conexión a MetaMask
     return web3;
   } else {
-    throw new Error("MetaMask no está instalado.");
+    throw new Error("No se encontró un proveedor de Web3.");
   }
 };
 
-export const getContract = () => {
-  if (!contractInstance) {
-    if (!web3) {
-      throw new Error("Web3 no está inicializado. Llama primero a initWeb3.");
-    }
-    contractInstance = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-  }
-  return contractInstance;
+
+export const getContract = (web3: Web3) => {
+  return new web3.eth.Contract(CONTRACT_ABI as any, CONTRACT_ADDRESS);
 };
+
+
+

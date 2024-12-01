@@ -3,66 +3,147 @@
 import { useEffect, useState } from "react";
 import { initWeb3, getContract } from "../utils/contract";
 
-export default function Home() {
+export default function TransferPage() {
   const [account, setAccount] = useState<string | null>(null);
-  const [contractData, setContractData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
+
+  // Estado para manejar el formulario de transferencia
+  const [transferData, setTransferData] = useState({
+    from: "",
+    to: "",
+    id: 1,
+    amount: 1,
+    data: "0x",
+  });
 
   useEffect(() => {
-    const initialize = async () => {
+    const connectWeb3 = async () => {
       try {
-        await initWeb3();
+        const web3Instance = await initWeb3();
+        console.log("Web3 inicializado:", web3Instance);
 
-        const web3 = getContract()._provider;
-        const accounts = await web3.eth.getAccounts();
-        if (accounts.length === 0) {
-          throw new Error("No hay cuentas conectadas a MetaMask.");
+        const contractInstance = getContract(web3Instance);
+        console.log("Contrato inicializado:", contractInstance);
+
+        const accounts = await web3Instance.eth.getAccounts();
+        console.log("Cuentas disponibles:", accounts);
+
+        if (accounts.length > 0) {
+          setAccount(accounts[0]);
+          setTransferData((prev) => ({ ...prev, from: accounts[0] }));
+        } else {
+          throw new Error("No se encontraron cuentas.");
         }
-        setAccount(accounts[0]);
-
-        const networkId = await web3.eth.net.getId();
-        if (networkId !== 11155111) {
-          throw new Error("Por favor, conecta MetaMask a la red de prueba Sepolia.");
+      } catch (err) {
+        console.error("Error en la conexión a Web3:", err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Ocurrió un error desconocido.");
         }
-
-        const contract = getContract();
-        const data = await contract.methods.getData().call();
-        setContractData(data);
-      } catch (error) {
-        const errorMessage =
-          error instanceof Error
-            ? error.message
-            : "Ocurrió un error desconocido.";
-        console.error("Error durante la inicialización:", errorMessage);
-        setError(errorMessage);
       }
     };
 
-    initialize();
+    connectWeb3();
   }, []);
 
-  useEffect(() => {
-    const handleNetworkChange = () => {
-      window.location.reload();
-    };
+  const handleTransfer = async () => {
+    try {
+      const web3Instance = await initWeb3();
 
-    window.ethereum.on("chainChanged", handleNetworkChange);
+      const { from, to, amount } = transferData;
 
-    return () => {
-      window.ethereum.removeListener("chainChanged", handleNetworkChange);
-    };
-  }, []);
+      // Asegurarse de que la dirección está normalizada
+      const normalizedToAddress = web3Instance.utils.toChecksumAddress(to);
+      console.log("Dirección normalizada:", normalizedToAddress);
+
+      // Verificar que la dirección sea válida
+      if (!web3Instance.utils.isAddress(normalizedToAddress)) {
+        throw new Error("La dirección de destino no es válida.");
+      }
+
+      // Convertir la cantidad a la representación correcta (ether)
+      const adjustedAmount = web3Instance.utils.toWei(amount.toString(), "ether");
+
+      // Enviar la transacción con web3.eth.sendTransaction() para hacer una prueba directa
+      const tx = await web3Instance.eth.sendTransaction({
+        from,
+        to: normalizedToAddress,
+        value: adjustedAmount, // Si estás enviando ETH directamente
+      });
+
+      console.log("Transacción exitosa:", tx);
+
+      // Asegurarse de que transactionHash sea un string
+      setTransactionHash(tx.transactionHash.toString());
+    } catch (err) {
+      console.error("Error en la transferencia:", err);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Ocurrió un error durante la transferencia.");
+      }
+    }
+  };
 
   return (
-    <div>
-      <h1>Conexión con MetaMask y Sepolia</h1>
+    <div style={{ marginTop: "100px" }}>
+      <h1>Transferencia de Tokens</h1>
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       <p>
         <strong>Cuenta conectada:</strong> {account || "No conectado"}
       </p>
-      <p>
-        <strong>Datos del contrato:</strong> {contractData || "Cargando..."}
-      </p>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleTransfer();
+        }}
+      >
+        <label htmlFor="toInput">Dirección destino:</label>
+        <input
+          type="text"
+          id="toInput"
+          value={transferData.to}
+          onChange={(e) => setTransferData({ ...transferData, to: e.target.value })}
+          required
+        />
+
+        <label htmlFor="idInput">ID del token:</label>
+        <input
+          type="number"
+          id="idInput"
+          value={transferData.id}
+          onChange={(e) => setTransferData({ ...transferData, id: Number(e.target.value) })}
+          required
+        />
+
+        <label htmlFor="amountInput">Cantidad:</label>
+        <input
+          type="number"
+          id="amountInput"
+          value={transferData.amount}
+          onChange={(e) => setTransferData({ ...transferData, amount: Number(e.target.value) })}
+          required
+        />
+
+        <label htmlFor="dataInput">Datos (opcional):</label>
+        <input
+          type="text"
+          id="dataInput"
+          value={transferData.data}
+          onChange={(e) => setTransferData({ ...transferData, data: e.target.value })}
+        />
+
+        <button type="submit" style={{ marginTop: "10px" }}>
+          Transferir
+        </button>
+      </form>
+      {transactionHash && (
+        <p>
+          <strong>Hash de la transacción:</strong> {transactionHash}
+        </p>
+      )}
     </div>
   );
 }
