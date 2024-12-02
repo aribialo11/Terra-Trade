@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <span>Preguntas frecuentes</span>
             </Link>
             <Link
-              href="/paginanueva"
+              href="/propiedades"
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <span>Terrenos</span>

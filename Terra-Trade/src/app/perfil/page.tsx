@@ -20,7 +20,7 @@ const Perfil = () => {
   };
 
   const handleSubirTerrenoClick = () => {
-    router.push('/propiedades'); // Redirigir a la página de propiedades
+    router.push('/paginanueva'); // Redirigir a la página de propiedades
   };
 
   return (
