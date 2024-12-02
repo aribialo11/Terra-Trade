@@ -8,7 +8,6 @@ export default function TransferPage() {
   const [error, setError] = useState<string | null>(null);
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
 
-  // Estado para manejar el formulario de transferencia
   const [transferData, setTransferData] = useState({
     from: "",
     to: "",
@@ -21,14 +20,7 @@ export default function TransferPage() {
     const connectWeb3 = async () => {
       try {
         const web3Instance = await initWeb3();
-        console.log("Web3 inicializado:", web3Instance);
-
-        const contractInstance = getContract(web3Instance);
-        console.log("Contrato inicializado:", contractInstance);
-
         const accounts = await web3Instance.eth.getAccounts();
-        console.log("Cuentas disponibles:", accounts);
-
         if (accounts.length > 0) {
           setAccount(accounts[0]);
           setTransferData((prev) => ({ ...prev, from: accounts[0] }));
@@ -36,12 +28,8 @@ export default function TransferPage() {
           throw new Error("No se encontraron cuentas.");
         }
       } catch (err) {
-        console.error("Error en la conexión a Web3:", err);
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Ocurrió un error desconocido.");
-        }
+        if (err instanceof Error) setError(err.message);
+        else setError("Ocurrió un error desconocido.");
       }
     };
 
@@ -51,99 +39,155 @@ export default function TransferPage() {
   const handleTransfer = async () => {
     try {
       const web3Instance = await initWeb3();
-
       const { from, to, amount } = transferData;
-
-      // Asegurarse de que la dirección está normalizada
       const normalizedToAddress = web3Instance.utils.toChecksumAddress(to);
-      console.log("Dirección normalizada:", normalizedToAddress);
 
-      // Verificar que la dirección sea válida
       if (!web3Instance.utils.isAddress(normalizedToAddress)) {
         throw new Error("La dirección de destino no es válida.");
       }
 
-      // Convertir la cantidad a la representación correcta (ether)
       const adjustedAmount = web3Instance.utils.toWei(amount.toString(), "ether");
 
-      // Enviar la transacción con web3.eth.sendTransaction() para hacer una prueba directa
       const tx = await web3Instance.eth.sendTransaction({
         from,
         to: normalizedToAddress,
-        value: adjustedAmount, // Si estás enviando ETH directamente
+        value: adjustedAmount,
       });
 
-      console.log("Transacción exitosa:", tx);
-
-      // Asegurarse de que transactionHash sea un string
       setTransactionHash(tx.transactionHash.toString());
     } catch (err) {
-      console.error("Error en la transferencia:", err);
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Ocurrió un error durante la transferencia.");
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError("Ocurrió un error durante la transferencia.");
     }
   };
 
   return (
-    <div style={{ marginTop: "100px" }}>
-      <h1>Transferencia de Tokens</h1>
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
-      <p>
-        <strong>Cuenta conectada:</strong> {account || "No conectado"}
-      </p>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleTransfer();
+    <div
+      style={{
+        marginTop: "100px",
+        padding: "20px",
+        backgroundColor: "#20493C",
+        minHeight: "100vh",
+      }}
+    >
+      <h1 style={{ color: "white", textAlign: "center", marginBottom: "30px", fontSize:"40px", font:"-moz-initial" }}>
+        Transferencia de Tokens
+      </h1>
+      {error && <p style={{ color: "red", textAlign: "center" }}>Error: {error}</p>}
+      <div
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          padding: "20px",
         }}
       >
-        <label htmlFor="toInput">Dirección destino:</label>
-        <input
-          type="text"
-          id="toInput"
-          value={transferData.to}
-          onChange={(e) => setTransferData({ ...transferData, to: e.target.value })}
-          required
-        />
-
-        <label htmlFor="idInput">ID del token:</label>
-        <input
-          type="number"
-          id="idInput"
-          value={transferData.id}
-          onChange={(e) => setTransferData({ ...transferData, id: Number(e.target.value) })}
-          required
-        />
-
-        <label htmlFor="amountInput">Cantidad:</label>
-        <input
-          type="number"
-          id="amountInput"
-          value={transferData.amount}
-          onChange={(e) => setTransferData({ ...transferData, amount: Number(e.target.value) })}
-          required
-        />
-
-        <label htmlFor="dataInput">Datos (opcional):</label>
-        <input
-          type="text"
-          id="dataInput"
-          value={transferData.data}
-          onChange={(e) => setTransferData({ ...transferData, data: e.target.value })}
-        />
-
-        <button type="submit" style={{ marginTop: "10px" }}>
-          Transferir
-        </button>
-      </form>
-      {transactionHash && (
-        <p>
-          <strong>Hash de la transacción:</strong> {transactionHash}
+        <p style={{ color: "#20493C", marginBottom: "20px" }}>
+          <strong>Cuenta conectada:</strong> {account || "No conectado"}
         </p>
-      )}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleTransfer();
+          }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+          }}
+        >
+          <label htmlFor="toInput" style={{ color: "#20493C", fontWeight: "bold" }}>
+            Dirección destino:
+          </label>
+          <input
+            type="text"
+            id="toInput"
+            value={transferData.to}
+            onChange={(e) => setTransferData({ ...transferData, to: e.target.value })}
+            required
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+            }}
+          />
+
+          <label htmlFor="idInput" style={{ color: "#20493C", fontWeight: "bold" }}>
+            ID del token:
+          </label>
+          <input
+            type="number"
+            id="idInput"
+            value={transferData.id}
+            onChange={(e) => setTransferData({ ...transferData, id: Number(e.target.value) })}
+            required
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+            }}
+          />
+
+          <label htmlFor="amountInput" style={{ color: "#20493C", fontWeight: "bold" }}>
+            Cantidad:
+          </label>
+          <input
+            type="number"
+            id="amountInput"
+            value={transferData.amount}
+            onChange={(e) => setTransferData({ ...transferData, amount: Number(e.target.value) })}
+            required
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+            }}
+          />
+
+          <label htmlFor="dataInput" style={{ color: "#20493C", fontWeight: "bold" }}>
+            Datos (opcional):
+          </label>
+          <input
+            type="text"
+            id="dataInput"
+            value={transferData.data}
+            onChange={(e) => setTransferData({ ...transferData, data: e.target.value })}
+            style={{
+              padding: "10px",
+              borderRadius: "10px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+            }}
+          />
+
+          <button
+            type="submit"
+            style={{
+              marginTop: "20px",
+              padding: "15px",
+              backgroundColor: "#20493C",
+              color: "white",
+              border: "none",
+              borderRadius: "10px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Transferir
+          </button>
+        </form>
+        {transactionHash && (
+          <p style={{ color: "#20493C", marginTop: "20px" }}>
+            <strong>Hash de la transacción:</strong> {transactionHash}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
