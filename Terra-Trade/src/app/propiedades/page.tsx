@@ -1,88 +1,73 @@
-'use client';
+"use client";
 
-import React, { useRef, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
 
-interface Propiedad {
-  id: number;
-  nombre: string;
-  direccion: string;
-  barrio: string;
-  precio: number;
-  url_de_la_imagen: string;
-}
+export default function VisualizarPropiedadesPage() {
+  const [propiedades, setPropiedades] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-const Page: React.FC = () => {
-  const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
-  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    const fetchPropiedades = async () => {
+      try {
+        const response = await fetch("/api/visualizar", {
+          method: "GET",
+        });
 
-  const addProperty = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+        if (!response.ok) {
+          throw new Error("Error al obtener las propiedades");
+        }
 
-    if (formRef.current) {
-      const form = formRef.current;
+        const data = await response.json();
+        setPropiedades(data);
+      } catch (err) {
+        console.error("Error al obtener las propiedades:", err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Ocurrió un error desconocido.");
+        }
+      }
+    };
 
-      const newPropiedad = {
-        id: Date.now(),
-        nombre: form["propiedad-nombre"].value,
-        direccion: form["propiedad-direccion"].value,
-        barrio: form["propiedad-barrio"].value,
-        precio: Number(form["propiedad-precio"].value),
-        url_de_la_imagen: form["propiedad-imagen"].value,
-      };
-
-      setPropiedades([...propiedades, newPropiedad]);
-      form.reset();
-    }
-  };
-
-  const deleteProperty = async (id: number) => {
-    setPropiedades(propiedades.filter((propiedad) => propiedad.id !== id));
-  };
+    fetchPropiedades();
+  }, []);
 
   return (
-    <div className="container">
-      {/* Formulario */}
-      <div className="Formulario">
-        <h2 className="titulo">Agregar Nueva Propiedad</h2>
-        <form id="Formulario" onSubmit={addProperty} ref={formRef}>
-          <label htmlFor="propiedad-nombre">Nombre:</label>
-          <input type="text" id="propiedad-nombre" name="propiedad-nombre" required />
-          <label htmlFor="propiedad-direccion">Dirección:</label>
-          <input type="text" id="propiedad-direccion" name="propiedad-direccion" required />
-          <label htmlFor="propiedad-barrio">Barrio:</label>
-          <input type="text" id="propiedad-barrio" name="propiedad-barrio" required />
-          <label htmlFor="propiedad-precio">Precio:</label>
-          <input type="number" id="propiedad-precio" name="propiedad-precio" required />
-          <label htmlFor="propiedad-imagen">URL de la imagen:</label>
-          <input type="text" id="propiedad-imagen" name="propiedad-imagen" required />
-          <input className="boton" type="submit" value="Agregar Propiedad" />
-        </form>
-      </div>
-
-      {/* Contenedor de propiedades */}
-      <div id="properties-container" className="properties-container">
-        {propiedades.map((propiedad) => (
-          <div key={propiedad.id} className="property">
-            <button className="delete-button" onClick={() => deleteProperty(propiedad.id)}>
-              Eliminar
-            </button>
-            <Image
-              src={propiedad.url_de_la_imagen}
-              alt={`Imagen de ${propiedad.nombre}`}
-              width={16} // Relación de aspecto (proporcional)
-              height={9}
-              layout="responsive" 
-            /> 
-            <h2>{propiedad.nombre}</h2>
-            <p>Dirección: {propiedad.direccion}</p>
-            <p>Barrio: {propiedad.barrio}</p>
-            <p>Precio: ${propiedad.precio}</p>
-          </div>
-        ))}
-      </div>
+    <div style={{ marginTop: "50px" }}>
+      <h1>Propiedades Guardadas</h1>
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+            <table border={1} cellPadding={10} style={{ width: "100%", marginTop: "20px" }}>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Barrio</th>
+            <th>Precio</th>
+            <th>URL de la Imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {propiedades.length > 0 ? (
+            propiedades.map((propiedad) => (
+              <tr key={propiedad.id}>
+                <td>{propiedad.nombre}</td>
+                <td>{propiedad.direccion}</td>
+                <td>{propiedad.barrio}</td>
+                <td>${propiedad.precio}</td>
+                <td>
+                  <a href={propiedad.url_de_la_imagen} target="_blank" rel="noopener noreferrer">
+                    Ver Imagen
+                  </a>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5}>No se encontraron propiedades</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
-};
-
-export default Page;
+}
