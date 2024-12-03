@@ -19,6 +19,7 @@ const Page: React.FC = () => {
         precio: Number(formData.get('propiedad-precio')),
         telefono: formData.get('propiedad-telefono') as string,
         url_de_la_imagen: formData.get('propiedad-imagen') as string,
+        metamask_address: formData.get('propiedad-metamask') as string, // Nueva propiedad
       };
 
       try {
@@ -63,6 +64,9 @@ const Page: React.FC = () => {
 
         <label htmlFor="propiedad-imagen">Imagen (URL):</label><br />
         <input type="text" id="propiedad-imagen" name="propiedad-imagen" required /><br />
+
+        <label htmlFor="propiedad-metamask">Dirección de MetaMask:</label><br />
+        <input type="text" id="propiedad-metamask" name="propiedad-metamask" required /><br />
 
         <input className="boton" type="submit" value="Agregar Propiedad" />
       </form>

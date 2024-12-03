@@ -1,26 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Importar el hook useRouter
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const Perfil = () => {
-  const [mostrarDatos, setMostrarDatos] = useState(false);
-  const [mostrarPropiedades, setMostrarPropiedades] = useState(false);
-
-  const router = useRouter(); // Instancia del router
+  const router = useRouter();
 
   const handleDatosClick = () => {
-    setMostrarDatos(!mostrarDatos);
-    setMostrarPropiedades(false); // Cerrar "Propiedades" si se abre "Datos"
+    router.push('/datos'); // Redirigir a la página de "datos"
   };
 
   const handlePropiedadesClick = () => {
-    setMostrarPropiedades(!mostrarPropiedades);
-    setMostrarDatos(false); // Cerrar "Datos" si se abre "Propiedades"
+    router.push('/mis-propiedades'); // Redirigir a la página de "Mis propiedades"
   };
 
   const handleSubirTerrenoClick = () => {
-    router.push('/paginanueva'); // Redirigir a la página de propiedades
+    router.push('/paginanueva'); // Redirigir a la página de subir terrenos
   };
 
   return (
@@ -30,9 +25,9 @@ const Perfil = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start', // Alinear elementos al inicio
-        paddingTop: '150px', // Espacio entre el menú superior y el contenido
-        overflowY: 'auto', // Habilitar desplazamiento si es necesario
+        justifyContent: 'flex-start',
+        paddingTop: '150px',
+        overflowY: 'auto',
         height: '100vh',
       }}
     >
@@ -87,7 +82,7 @@ const Perfil = () => {
         </div>
 
         <button
-          onClick={handleSubirTerrenoClick} // Cambiar acción a redirección
+          onClick={handleSubirTerrenoClick}
           style={{
             backgroundColor: 'white',
             color: 'black',
@@ -105,42 +100,6 @@ const Perfil = () => {
           Subir terreno
         </button>
       </div>
-
-      {mostrarDatos && (
-        <div
-          style={{
-            backgroundColor: '#b7c9a6',
-            color: 'black',
-            fontFamily: 'Arial',
-            fontSize: '1rem',
-            padding: '20px',
-            borderRadius: '20px',
-            marginTop: '30px',
-            width: '60%',
-          }}
-        >
-          <h3>Datos personales</h3>
-          <p>Aquí van los datos personales del usuario...</p>
-        </div>
-      )}
-
-      {mostrarPropiedades && (
-        <div
-          style={{
-            backgroundColor: '#b7c9a6',
-            color: 'black',
-            fontFamily: 'Arial',
-            fontSize: '1rem',
-            padding: '20px',
-            borderRadius: '20px',
-            marginTop: '30px',
-            width: '60%',
-          }}
-        >
-          <h3>Mis Propiedades</h3>
-          <p>Aquí se enlistarán las propiedades del usuario...</p>
-        </div>
-      )}
     </div>
   );
 };

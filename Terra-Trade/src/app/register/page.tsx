@@ -11,12 +11,15 @@ const supabase = createClient(
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nombreCompleto, setNombreCompleto] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [edad, setEdad] = useState<number | "">("");
   const [message, setMessage] = useState("");
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!email || !password) {
+    if (!email || !password || !nombreCompleto || !telefono || !edad) {
       setMessage("Por favor, completa todos los campos.");
       return;
     }
@@ -38,7 +41,9 @@ export default function Register() {
         return;
       }
 
-      const { data, error } = await supabase.from("users").insert([{ email, password }]);
+      const { data, error } = await supabase.from("users").insert([
+        { email, password, nombre_completo: nombreCompleto, telefono, edad },
+      ]);
 
       if (error) {
         setMessage("Error al registrar al usuario.");
@@ -78,6 +83,54 @@ export default function Register() {
           Registro
         </h1>
         <form onSubmit={handleRegister}>
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              type="text"
+              placeholder="Nombre completo"
+              value={nombreCompleto}
+              onChange={(e) => setNombreCompleto(e.target.value)}
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                fontSize: "1rem",
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              type="tel"
+              placeholder="Teléfono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                fontSize: "1rem",
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              type="number"
+              placeholder="Edad"
+              value={edad}
+              onChange={(e) => setEdad(Number(e.target.value) || "")}
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                fontSize: "1rem",
+              }}
+            />
+          </div>
           <div style={{ marginBottom: "15px" }}>
             <input
               type="email"
