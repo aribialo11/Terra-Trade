@@ -6,7 +6,8 @@
   "build": "dotenv -e .env.production next build",
   "dev": "dotenv -e .env.development next dev",
   "start": "next start"
-},
+}
+,
 
   "dependencies": {
     "@metamask/sdk-react": "^0.14.1",
