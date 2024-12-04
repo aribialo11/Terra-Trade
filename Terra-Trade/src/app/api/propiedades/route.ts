@@ -1,8 +1,21 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'; 
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
+import type { NextRequest } from 'next/server';
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
-export async function POST(req: Request) {
+// Define el tipo de los datos que se van a insertar
+interface Propiedad {
+  nombre: string;
+  direccion: string;
+  barrio: string;
+  precio: number;
+  telefono: string;
+  url_de_la_imagen: string;
+  metamask_address: string;
+}
+
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
@@ -13,7 +26,7 @@ export async function POST(req: Request) {
       !body.precio ||
       !body.telefono ||
       !body.url_de_la_imagen ||
-      !body.metamask_address // Verifica que también se haya proporcionado la dirección de MetaMask
+      !body.metamask_address
     ) {
       return NextResponse.json({ message: 'Todos los campos son obligatorios' }, { status: 400 });
     }
@@ -21,19 +34,26 @@ export async function POST(req: Request) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
-    if(typeof body.precio !== "number" )
-      {
-        body.precio = [parseInt(body.precio)]; 
-      } 
-    else {
-        body.precio = [body.precio];
-      }
-    
-    const { data, error } = await supabase.from('propiedades').insert(body);
+    if (typeof body.precio !== 'number') {
+      body.precio = parseInt(body.precio, 10);
+    }
+
+    // Cambia el tipo de la respuesta a PostgrestSingleResponse
+    const { data, error }: PostgrestSingleResponse<Propiedad[] | null> = await supabase
+      .from('propiedades')
+      .insert([body]);
 
     if (error) {
       console.error('Error de Supabase:', error);
-      throw error;
+      return NextResponse.json(
+        { message: 'Error de Supabase', error: error.message },
+        { status: 500 }
+      );
+    }
+
+    // Valida que `data` sea un arreglo y que contenga elementos
+    if (!data || data.length === 0) {
+      return NextResponse.json({ message: 'No se pudo insertar la propiedad' }, { status: 400 });
     }
 
     return NextResponse.json(data, { status: 200 });

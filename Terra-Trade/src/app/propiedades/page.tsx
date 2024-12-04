@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import type { NextRequest } from 'next/server';
 
 export default function VisualizarPropiedadesPage() {
   const [propiedades, setPropiedades] = useState<any[]>([]);
