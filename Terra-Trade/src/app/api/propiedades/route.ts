@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'; 
+import { NextResponse } from 'next/server';
 import { createClient } from '@/app/utils/supabase/server';
 import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-¿    if (!data || !Array.isArray(data) || data.length === 0) {
+    if (!data || !Array.isArray(data) || data.length === 0) {
       return NextResponse.json({ message: 'No se pudo insertar la propiedad' }, { status: 400 });
     }
 
@@ -62,4 +62,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
- 
