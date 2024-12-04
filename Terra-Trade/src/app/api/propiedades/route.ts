@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
       body.precio = parseInt(body.precio, 10);
     }
 
-    // Cambia el tipo de la respuesta a PostgrestSingleResponse
     const { data, error }: PostgrestSingleResponse<Propiedad[] | null> = await supabase
       .from('propiedades')
       .insert([body]);
@@ -52,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Valida que `data` sea un arreglo y que contenga elementos
-    if (!data || data.length === 0) {
+    if (!data || !Array.isArray(data) || data.length === 0) {
       return NextResponse.json({ message: 'No se pudo insertar la propiedad' }, { status: 400 });
     }
 
