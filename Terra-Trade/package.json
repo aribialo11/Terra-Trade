@@ -2,12 +2,12 @@
   "name": "terra-trade",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "build": "dotenv -e .env.production next build",
+  "dev": "dotenv -e .env.development next dev",
+  "start": "next start"
+},
+
   "dependencies": {
     "@metamask/sdk-react": "^0.14.1",
     "@supabase/auth-helpers-react": "^0.5.0",
