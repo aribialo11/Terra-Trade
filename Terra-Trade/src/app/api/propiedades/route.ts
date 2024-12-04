@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/app/utils/supabase/server';
-import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import type { PostgrestSingleResponse } from '@supabase/supabase-js';
+import { cookies } from 'next/headers';
 
 interface Propiedad {
   nombre: string;
