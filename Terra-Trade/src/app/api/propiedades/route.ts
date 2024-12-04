@@ -4,7 +4,6 @@ import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
-// Define el tipo de los datos que se van a insertar
 interface Propiedad {
   nombre: string;
   direccion: string;
@@ -50,8 +49,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Valida que `data` sea un arreglo y que contenga elementos
-    if (!data || !Array.isArray(data) || data.length === 0) {
+¿    if (!data || !Array.isArray(data) || data.length === 0) {
       return NextResponse.json({ message: 'No se pudo insertar la propiedad' }, { status: 400 });
     }
 
@@ -64,3 +62,4 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+ 
