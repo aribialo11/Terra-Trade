@@ -22,9 +22,8 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./*"],
+      "/*": ["./node_modules/*"]
     },
     "target": "ES2017"
   },
@@ -33,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../../dist/client/types/**/*.ts"
+    "../../dist/client/types/**/*.ts",
+    "src/**/*",
   ],
   "exclude": [
     "node_modules"
