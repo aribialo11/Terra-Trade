@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": ".", // Establece la base para rutas absolutas
+    "baseUrl": ".", 
     "paths": {
-      "@/*": ["src/*"] // Configura el alias para que apunte a la carpeta src
+      "@/*": ["src/*"]
     },
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,8 +20,20 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "target": "ES2017"
+    "target": "ES2017",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "src/**/*", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "src/**/*",
+    ".next/types/**/*.ts",
+    "../../dist/client/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
